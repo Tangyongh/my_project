@@ -1,0 +1,8 @@
+include ':libraryx'
+include ':viewbinding-base'
+include ':circleindicator'
+include ':FlycoTabLayout_Lib'
+include ':lib_common'
+include ':lib_opensource'
+include ':app'
+rootProject.name = "ddyj"

@@ -1,0 +1,62 @@
+def rxBindingVersion = "4.0.0"
+def retrofitVersion = "2.9.0"
+def okHttpVersion = "3.12.13"
+def daggerVersion = "2.9.0"
+def version_appcompat = "1.3.1" //
+def version_constraintLayout = "2.0.4"
+def version_cardView = "1.0.0"
+project.ext {
+    android = [
+            compileSdkVersion: 30,
+            minSdkVersion    : 21,
+            targetSdkVersion : 30,
+            versionCode      : 343,
+            versionName      : "3.4.3"
+    ]
+
+    dependencies = [
+            //androidx
+            "version_appcompat"          : "androidx.appcompat:appcompat:${version_appcompat}",
+            "constraintlayout"           : "androidx.constraintlayout:constraintlayout:${version_constraintLayout}",
+            "cardview"                   : "androidx.cardview:cardview:${version_cardView}",
+            "material"                   : "com.google.android.material:material:1.4.0",
+            //rx
+            "rxjava"                     : "io.reactivex.rxjava3:rxjava:3.1.3",
+            "rxandroid"                  : "io.reactivex.rxjava3:rxandroid:3.0.0",
+            "rxlifecycle"                : "com.trello.rxlifecycle4:rxlifecycle:4.0.2",
+            "rxlifecycle-components"     : "com.trello.rxlifecycle4:rxlifecycle-components:4.0.2",
+
+            "rxbinding"                  : "com.jakewharton.rxbinding4:rxbinding-core:${rxBindingVersion}",
+            "rxbinding-appcompat-v7"     : "com.jakewharton.rxbinding4:rxbinding-appcompat:${rxBindingVersion}",
+            "rxbinding-recyclerview-v7"  : "com.jakewharton.rxbinding4:rxbinding-recyclerview:${rxBindingVersion}",
+
+            //retrofit
+            "retrofit"                   : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            "adapter-rxjava"             : "com.squareup.retrofit2:adapter-rxjava3:${retrofitVersion}",
+            "retrofit-converter"         : "com.squareup.retrofit2:converter-scalars:${retrofitVersion}",
+            "retrofit-converter-gson"    : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            "gson"
+                                         : "com.google.code.gson:gson:2.9.0",
+            //router
+            // 替换成最新版本, 需要注意的是api
+            // 要与compiler匹配使用，均使用最新版可以保证兼容
+            "router"                     : "com.alibaba:arouter-api:1.5.2",
+            "router-compiler"            : "com.alibaba:arouter-compiler:1.5.2",
+            //okHttp3
+            "okhttp3"                    : "com.squareup.okhttp3:okhttp:${okHttpVersion}",
+            "okhttp3-logging-interceptor": "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}",
+            //test
+            "junit"                      : "junit:junit:4.12",
+
+            //autosize
+            "autosize"                   : "me.jessyan:autosize:1.2.1",
+            "glide"                      : "com.github.bumptech.glide:glide:4.12.0",
+            "glide-integration"          : "com.github.bumptech.glide:okhttp3-integration:4.12.0",
+            "glide-compiler"             : "com.github.bumptech.glide:compiler:4.12.0",
+            //权限框架
+            "permissiolnx"               : "com.permissionx.guolindev:permissionx:1.2.2",
+            //轮播图
+            "banner"                     : "com.youth.banner:banner:1.4.10",
+            "liveEventBus"               : "com.jeremyliao:live-event-bus-x:1.7.3",
+    ]
+}

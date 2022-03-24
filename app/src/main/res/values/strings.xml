@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">叮叮易建</string>
+    <string name="tv_loaIng_content">请稍后...</string>
+    <string name="tv_login">登录/注册</string>
+    <string name="tv_check_info">查看名片</string>
+    <string name="tv_my_money">我的工钱</string>
+    <string name="tv_login_content">欢迎来到叮叮易建</string>
+    <string name="et_phone_login">请输入手机号码或登录名登录</string>
+</resources>

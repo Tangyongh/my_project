@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/matchStyle"
+    android:background="@color/text_color_white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+
+    <com.ibd.tablayout.SlidingTabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp48"
+        android:background="@color/colorPrimary"
+        android:paddingEnd="@dimen/dp15"
+        tl:tl_indicator_height="@dimen/dp0"
+        tl:tl_indicator_width="@dimen/dp0"
+        tl:tl_tab_space_equal="true"
+        tl:tl_textBold="SELECT"
+        tl:tl_textSelectColor="@color/text_color_orange"
+        tl:tl_textUnselectColor="@color/colorPrimaryDark"
+        tl:tl_textsize="@dimen/text_size_18"
+        tools:ignore="RtlSymmetry" />
+
+
+    <com.dingdingyijian.ddyj.view.ViewPagerSlide
+        android:id="@+id/viewPage"
+        style="@style/matchStyle" />
+
+
+</LinearLayout>

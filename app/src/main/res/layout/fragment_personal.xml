@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/matchStyle"
+    android:background="@color/colo_f8f8f8"
+    android:orientation="vertical">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp195">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp123"
+            android:background="@color/content_bg_color" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp175"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginEnd="@dimen/dp10"
+            app:cardBackgroundColor="@color/text_color_white"
+            app:cardCornerRadius="@dimen/dp10"
+            app:cardElevation="@dimen/dp3"
+            app:cardPreventCornerOverlap="false">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/content_user"
+                    style="@style/wrapStyle"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginTop="@dimen/dp15">
+
+
+                    <FrameLayout
+                        android:id="@+id/content_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/user_image"
+                            android:layout_width="@dimen/dp60"
+                            android:layout_height="@dimen/dp60"
+                            android:scaleType="centerCrop"
+                            app:shapeAppearanceOverlay="@style/circleStyle" />
+
+                        <ImageView
+                            android:id="@+id/iv_user_flag"
+                            style="@style/wrapStyle"
+                            android:layout_gravity="bottom|right"
+                            tools:ignore="RtlHardcoded" />
+
+                    </FrameLayout>
+
+                    <com.noober.background.view.BLButton
+                        android:id="@+id/btn_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/dp45"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dp10"
+                        android:layout_marginEnd="@dimen/dp50"
+                        android:layout_toEndOf="@id/content_image"
+                        android:paddingLeft="@dimen/dp10"
+                        android:paddingRight="@dimen/dp10"
+                        android:text="@string/tv_login"
+                        android:textColor="@color/text_colo_545454"
+                        android:textSize="@dimen/text_size_16"
+                        android:visibility="gone"
+                        app:bl_corners_radius="@dimen/dp8"
+                        app:bl_solid_color="@color/text_color_white"
+                        app:bl_stroke_color="@color/content_bg_color"
+                        app:bl_stroke_width="@dimen/dp1" />
+
+                    <RelativeLayout
+                        android:id="@+id/content"
+                        style="@style/matchWrapStyle"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/dp8"
+                        android:layout_toEndOf="@id/content_image"
+                        android:visibility="visible">
+
+                        <com.noober.background.view.BLTextView
+                            android:id="@+id/tv_business_card"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/dp30"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:drawableEnd="@mipmap/icon_back_right"
+                            android:gravity="center"
+                            android:paddingStart="@dimen/dp12"
+                            android:paddingEnd="@dimen/dp5"
+                            android:text="@string/tv_check_info"
+                            android:textColor="@color/content_bg_color"
+                            android:textSize="@dimen/text_size_14"
+                            android:textStyle="bold"
+                            app:bl_corners_bottomLeftRadius="@dimen/dp20"
+                            app:bl_corners_bottomRightRadius="@dimen/dp0"
+                            app:bl_corners_topLeftRadius="@dimen/dp20"
+                            app:bl_corners_topRightRadius="@dimen/dp0"
+                            app:bl_solid_color="@color/text_color_orange"
+                            tools:ignore="RelativeOverlap" />
+
+
+                        <TextView
+                            android:id="@+id/tv_user_name"
+                            style="@style/wrapStyle"
+                            android:drawablePadding="@dimen/dp3"
+                            android:textColor="@color/text_color_dark"
+                            android:textSize="@dimen/text_size_18" />
+
+                        <com.noober.background.view.BLRelativeLayout
+                            android:id="@+id/content_credit"
+                            style="@style/wrapStyle"
+                            android:layout_below="@id/tv_user_name"
+                            android:layout_marginTop="@dimen/dp5"
+                            android:visibility="gone"
+                            app:bl_corners_radius="@dimen/dp15"
+                            app:bl_solid_color="@color/colorAccent">
+
+                            <TextView
+                                android:id="@+id/tv_creditScale"
+                                style="@style/wrapStyle"
+                                android:drawableStart="@mipmap/icon_start"
+                                android:drawableEnd="@mipmap/icon_back_right_white"
+                                android:drawablePadding="1dp"
+                                android:gravity="center"
+                                android:paddingLeft="@dimen/dp5"
+                                android:paddingTop="@dimen/dp4"
+                                android:paddingRight="@dimen/dp5"
+                                android:paddingBottom="@dimen/dp4"
+                                android:textColor="@color/text_color_white"
+                                android:textSize="@dimen/text_size_11" />
+
+
+                        </com.noober.background.view.BLRelativeLayout>
+
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/text_color_white"
+                    android:orientation="horizontal">
+
+
+                    <LinearLayout
+                        android:id="@+id/content_my_money"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dp16"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/icon_my_money" />
+
+
+                        <TextView
+                            style="@style/wrapStyle"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="@dimen/dp16"
+                            android:text="@string/tv_my_money"
+                            android:textColor="@color/text_color_dark"
+                            android:textSize="@dimen/text_size_13" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/content_margin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dp16"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/icon_margin_bg" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="16dp"
+                            android:text="诚信保证金"
+                            android:textColor="@color/text_color_dark"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/content_my_order"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:orientation="vertical">
+
+
+                        <ImageView
+                            android:layout_width="@dimen/dp40"
+                            android:layout_height="@dimen/dp40"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/dp16"
+                            android:scaleType="centerCrop"
+                            android:src="@mipmap/icon_my_order_bg" />
+
+
+                        <TextView
+                            style="@style/wrapStyle"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="16dp"
+                            android:text="我的订单"
+                            android:textColor="@color/text_color_dark"
+                            android:textSize="@dimen/text_size_13" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/content_ny_notice"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+
+                        <RelativeLayout
+                            style="@style/wrapStyle"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp16">
+
+                            <ImageView
+                                android:layout_width="@dimen/dp40"
+                                android:layout_height="@dimen/dp40"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center_horizontal"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/icon_my_notice_bg" />
+
+
+                            <com.ibd.tablayout.widget.MsgView xmlns:mv="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/tv_message_read"
+                                style="@style/wrapStyle"
+                                android:layout_marginLeft="@dimen/dp25"
+                                android:gravity="center"
+                                android:textColor="@color/text_color_white"
+                                android:textSize="@dimen/text_size_11"
+                                mv:mv_backgroundColor="@color/text_color"
+                                mv:mv_isRadiusHalfHeight="true" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="16dp"
+                            android:text="我的消息"
+                            android:textColor="@color/text_color_dark"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+
+    <com.youth.banner.Banner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp68"
+        app:image_scale_type="fit_xy"
+        app:indicator_drawable_selected="@mipmap/banner_select"
+        app:indicator_drawable_unselected="@mipmap/banner_un"
+        app:indicator_height="@dimen/dp4"
+        app:indicator_margin="@dimen/dp3"
+        app:indicator_width="@dimen/dp10" />
+
+    <com.noober.background.view.BLLinearLayout
+        style="@style/matchWrapStyle"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:orientation="vertical"
+        app:bl_corners_radius="@dimen/dp6"
+        app:bl_solid_color="@color/text_color_white">
+
+
+        <TextView
+            style="@style/wrapStyle"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp12"
+            android:text="常用功能"
+            android:textColor="@color/text_color_dark"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            style="@style/matchWrapStyle"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginBottom="@dimen/dp15"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:id="@+id/content_vip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout style="@style/wrapStyle">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp40"
+                        android:layout_height="@dimen/dp40"
+                        android:layout_margin="@dimen/dp10"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/icon_hysj" />
+
+
+                    <com.noober.background.view.BLTextView
+                        style="@style/wrapStyle"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="@dimen/dp6"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp2"
+                        android:paddingRight="@dimen/dp2"
+                        android:text="优惠"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="@dimen/text_size_10"
+                        app:bl_corners_bottomLeftRadius="@dimen/dp0"
+                        app:bl_corners_bottomRightRadius="@dimen/dp8"
+                        app:bl_corners_topLeftRadius="@dimen/dp8"
+                        app:bl_corners_topRightRadius="@dimen/dp8"
+                        app:bl_solid_color="@color/text_color" />
+
+                </FrameLayout>
+
+                <TextView
+                    style="@style/wrapStyle"
+                    android:text="会员升级"
+                    android:textColor="@color/text_colo_gray"
+                    android:textSize="@dimen/text_size_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/content_award"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <FrameLayout style="@style/wrapStyle">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp40"
+                        android:layout_height="@dimen/dp40"
+                        android:layout_margin="@dimen/dp10"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/icon_yjhd" />
+
+
+                    <com.noober.background.view.BLTextView
+                        style="@style/wrapStyle"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="@dimen/dp6"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/dp2"
+                        android:paddingRight="@dimen/dp2"
+                        android:text="奖励"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="@dimen/text_size_10"
+                        app:bl_corners_bottomLeftRadius="@dimen/dp0"
+                        app:bl_corners_bottomRightRadius="@dimen/dp8"
+                        app:bl_corners_topLeftRadius="@dimen/dp8"
+                        app:bl_corners_topRightRadius="@dimen/dp8"
+                        app:bl_solid_color="@color/text_color" />
+
+                </FrameLayout>
+
+
+                <TextView
+                    style="@style/wrapStyle"
+                    android:text="有奖活动"
+                    android:textColor="@color/text_colo_gray"
+                    android:textSize="@dimen/text_size_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/content_work"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_margin="@dimen/dp10"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/icon_whgdh" />
+
+                <TextView
+                    style="@style/wrapStyle"
+                    android:text="我会干的活"
+                    android:textColor="@color/text_colo_gray"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/content_credit_points"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_margin="@dimen/dp10"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/icon_xyjf" />
+
+                <TextView
+                    style="@style/wrapStyle"
+                    android:text="信用积分"
+                    android:textColor="@color/text_colo_gray"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/matchWrapStyle"
+            android:layout_marginBottom="@dimen/dp15"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/content_college"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_margin="@dimen/dp10"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/icon_whgdh" />
+
+                <TextView
+                    style="@style/wrapStyle"
+                    android:text="叮叮学院"
+                    android:textColor="@color/text_colo_gray"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/content_setting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_margin="@dimen/dp10"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/icon_setting" />
+
+                <TextView
+                    style="@style/wrapStyle"
+                    android:text="设置"
+                    android:textColor="@color/text_colo_gray"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_dark"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_dark"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.noober.background.view.BLLinearLayout>
+
+
+    <com.noober.background.view.BLLinearLayout
+        style="@style/matchWrapStyle"
+        android:layout_margin="@dimen/dp10"
+        android:orientation="vertical"
+        app:bl_corners_radius="@dimen/dp6"
+        app:bl_solid_color="@color/text_color_white">
+
+
+        <TextView
+            style="@style/wrapStyle"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp12"
+            android:text="服务中心"
+            android:textColor="@color/text_color_dark"
+            android:textSize="@dimen/text_size_16"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            style="@style/matchWrapStyle"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginBottom="@dimen/dp15"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:id="@+id/content_kf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout style="@style/wrapStyle">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp40"
+                        android:layout_height="@dimen/dp40"
+                        android:layout_margin="@dimen/dp10"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/icon_customer_service" />
+
+                    <TextView
+                        android:id="@+id/tv_service_count"
+                        style="@style/wrapStyle"
+                        android:layout_marginLeft="@dimen/dp30"
+                        android:layout_marginTop="@dimen/dp5"
+                        android:gravity="center"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="@dimen/text_size_10" />
+
+
+                </RelativeLayout>
+
+
+                <TextView
+                    style="@style/wrapStyle"
+                    android:text="客服中心"
+                    android:textColor="@color/text_colo_gray"
+                    android:textSize="@dimen/text_size_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/content_share"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:id="@+id/iv_share_gif"
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_margin="@dimen/dp10"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/gif_bg" />
+
+                <TextView
+                    style="@style/wrapStyle"
+                    android:text="推荐给好友"
+                    android:textColor="@color/text_colo_gray"
+                    android:textSize="@dimen/text_size_13" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/content_sw"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="@dimen/dp40"
+                    android:layout_height="@dimen/dp40"
+                    android:layout_margin="@dimen/dp10"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/icon_swhz" />
+
+                <TextView
+                    style="@style/wrapStyle"
+                    android:text="商务合作"
+                    android:textColor="@color/text_colo_gray"
+                    android:textSize="@dimen/text_size_13" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/text_color_dark"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </com.noober.background.view.BLLinearLayout>
+
+
+</LinearLayout>

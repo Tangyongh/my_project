@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp48"
+    android:background="@color/text_color_white">
+
+    <RelativeLayout
+        android:id="@+id/content_back"
+        style="@style/wrapStyle"
+        android:layout_centerVertical="true"
+        android:clickable="true"
+        tools:ignore="KeyboardInaccessibleWidget">
+
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp20"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icon_back"
+            tools:ignore="ContentDescription" />
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tv_title_center_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/dp40"
+        android:layout_marginEnd="@dimen/dp40"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/text_color_dark"
+        android:textSize="@dimen/text_size_18"
+        android:textStyle="bold"
+        tools:ignore="RelativeOverlap" />
+
+
+    <TextView
+        android:id="@+id/tv_title_right_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/dp20"
+        android:gravity="center"
+        android:textColor="@color/text_color_dark"
+        android:textSize="@dimen/text_size_15"
+        android:visibility="visible"
+        tools:ignore="HardcodedText,RelativeOverlap" />
+
+
+    <ImageView
+        android:id="@+id/image_title_right"
+        android:layout_width="@dimen/dp25"
+        android:layout_height="@dimen/dp25"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/dp10"
+        android:scaleType="centerCrop"
+        tools:ignore="ContentDescription,HardcodedText" />
+</RelativeLayout>

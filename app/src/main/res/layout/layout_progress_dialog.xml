@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/wrapStyle"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:cardBackgroundColor="@color/colo_2D9000000"
+    app:cardCornerRadius="@dimen/dp7"
+    app:cardElevation="@dimen/dp0">
+
+
+    <LinearLayout
+        style="@style/wrapStyle"
+        android:gravity="center"
+        android:minWidth="@dimen/dp120"
+        android:minHeight="@dimen/dp120"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/loading"
+            android:layout_width="@dimen/dp50"
+            android:layout_height="@dimen/dp50"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@drawable/progress_loading"
+            android:indeterminateDuration="2000" />
+
+
+        <TextView
+            style="@style/wrapStyle"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp8"
+            android:text="@string/tv_loaIng_content"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_15" />
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

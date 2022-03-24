@@ -14,14 +14,12 @@ import com.dingdingyijian.ddyj.mvp.bean.NeedsCountBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserIconBean;
 import com.dingdingyijian.ddyj.mvp.contract.HomeFragmentContract;
 import com.dingdingyijian.ddyj.mvp.model.HomeFragmentModel;
-import com.dingdingyijian.ddyj.net.callback.RxHelper;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.LoginUtils;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
 import com.dingdingyijian.ddyj.utils.ToastUtil;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -140,7 +138,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
 
     @Override
     public void setNeedsCount(TextView missNeeds, TextView myNeeds, TextView sendNeeds) {
-        boolean isLogin = LoginUtils.isLogin(mContext);
+        boolean isLogin = LoginUtils.isLogin();
         //判断是否登录
         if (isLogin) {
             getNeedsCount(PreferenceUtil.getInstance().getString(ConstantOther.KEY_APP_USER_ID));

@@ -2,7 +2,6 @@ package com.dingdingyijian.ddyj.base;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -22,8 +21,6 @@ import com.dylanc.viewbinding.ViewBindingUtil;
 import com.gyf.immersionbar.ImmersionBar;
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 import com.umeng.analytics.MobclickAgent;
-
-import me.jessyan.autosize.AutoSizeCompat;
 
 /**
  * 父类->基类->动态指定类型->泛型设计（通过泛型指定动态类型->由子类指定，父类只需要规定范围即可）

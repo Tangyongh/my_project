@@ -25,6 +25,7 @@ public interface ForgetPwdContract {
     interface View extends BaseViewImp {
         //设置新密码
         void getSetPasswordResult();
+
         //发送验证码成功
         void getSendCodeResult();
     }
@@ -33,22 +34,25 @@ public interface ForgetPwdContract {
     abstract class Presenter extends BasePresenter<View> {
         //注册
         public abstract void getSetPassword(HashMap<String, String> hashMap);
+
         //发送登录验证码
-        public abstract void getSendCode(String mobile,String type);
+        public abstract void getSendCode(String mobile, String type);
 
         //点击显示隐藏密码
-        public abstract void  clickVisibilityOrGone(EditText editText, ImageButton imageButton);
+        public abstract void clickVisibilityOrGone(EditText editText, ImageButton imageButton);
+
         //点击发送验证码
         public abstract void clickSendCode(BLTextView textView, EditText phone);
+
         //点击注册
-        public abstract void  clickSetPassword(BLButton btnRegister, EditText phone, EditText code,EditText pwd,EditText confirmPwd);
+        public abstract void clickSetPassword(BLButton btnRegister, EditText phone, EditText code, EditText pwd, EditText confirmPwd);
 
     }
 
     @SuppressWarnings("rawtypes")
     interface Model {
         //设置新密码
-        void getSetPassword( HashMap<String, String> hashMap, Context context, BaseModelCallBack callBack);
+        void getSetPassword(HashMap<String, String> hashMap, Context context, BaseModelCallBack callBack);
 
         //获取验证码
         void getSendCode(String mobile, String type, Context context, BaseModelCallBack callBack);

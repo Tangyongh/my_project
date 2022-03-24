@@ -30,7 +30,7 @@ public abstract class BasePresenter<V extends BaseViewImp>{
 
 
     public void showDialog(){
-        if (mView != null){
+        if (getView() != null){
             loadingProgressDialog = new LoadingProgressDialog();
             loadingProgressDialog.createLoadingDialog((Context) getView());
             loadingProgressDialog.showDialog();

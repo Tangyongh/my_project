@@ -6,7 +6,6 @@ import android.view.KeyEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -17,6 +16,7 @@ import com.dingdingyijian.ddyj.adapter.GuideRecyclerAdapter;
 import com.dingdingyijian.ddyj.databinding.ActivityGuideBinding;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.gyf.immersionbar.ImmersionBar;
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
  * 引导页
  */
 @Route(path = Constant.PATH_GUIDE)
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends RxAppCompatActivity {
 
 
     private GuideRecyclerAdapter mAdapter;

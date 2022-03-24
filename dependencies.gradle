@@ -58,5 +58,8 @@ project.ext {
             //轮播图
             "banner"                     : "com.youth.banner:banner:1.4.10",
             "liveEventBus"               : "com.jeremyliao:live-event-bus-x:1.7.3",
+            "leakcanary"                 : "com.squareup.leakcanary:leakcanary-android:2.8.1",
+            //状态栏
+            "immersionbar"               : "com.geyifeng.immersionbar:immersionbar:3.2.1",
     ]
 }

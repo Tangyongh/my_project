@@ -21,7 +21,6 @@ public class MapViewResult {
      * @param iconLocation
      */
     public static void getMapView(Context context, Bundle savedInstanceState, CustomMapView mapView, ImageView iconLocation) {
-        mapView.onCreate(savedInstanceState);
         mapView.init(context, savedInstanceState, mapView);
         mapView.startLocation();
         mapView.activate();

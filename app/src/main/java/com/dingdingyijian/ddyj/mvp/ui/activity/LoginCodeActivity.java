@@ -8,6 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingdingyijian.ddyj.base.BaseActivity;
 import com.dingdingyijian.ddyj.databinding.ActivityCodeLoginBinding;
+import com.dingdingyijian.ddyj.event.LoginEvent;
 import com.dingdingyijian.ddyj.jpush.ExampleUtil;
 import com.dingdingyijian.ddyj.mvp.bean.LoginBean;
 import com.dingdingyijian.ddyj.mvp.contract.LoginCodeContract;
@@ -18,6 +19,7 @@ import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.CountDownTimerUtils;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
 import com.dingdingyijian.ddyj.utils.ToastUtil;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.noober.background.view.BLButton;
 
 import java.util.HashMap;
@@ -84,6 +86,8 @@ public class LoginCodeActivity extends BaseActivity<LoginCodeContract.View, Logi
     public void getLoginResult(LoginBean loginBean) {
         //缓存登录信息
         LoginInfo.setUserInfo(loginBean);
+        //登录成功的时候发送消息，给主界面刷新下界面
+        LiveEventBus.get(LoginEvent.class).post(new LoginEvent());
         //设置推送别名
         setAlias(loginBean);
         finish();

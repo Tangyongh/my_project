@@ -4,13 +4,11 @@ import android.content.Context;
 
 import com.dingdingyijian.ddyj.api.RetrofitUtil;
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
-import com.dingdingyijian.ddyj.base.BaseResponse;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.contract.MainContract;
-import com.dingdingyijian.ddyj.net.callback.ObserverCall;
+import com.dingdingyijian.ddyj.net.callback.BaseObserver;
 import com.dingdingyijian.ddyj.net.callback.RxHelper;
 import com.dingdingyijian.ddyj.utils.ConstantUtils;
-import com.trello.rxlifecycle4.LifecycleTransformer;
 
 import java.util.HashMap;
 
@@ -36,7 +34,7 @@ public class MainModel implements MainContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .mainAdPopup(ConstantUtils.convertMapToBody(hashMap))
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<String>(context) {
+                .subscribe(new BaseObserver<String>(context) {
                     @Override
                     public void onSuccess(String result) {
                         callBack.onNext(result);
@@ -61,7 +59,7 @@ public class MainModel implements MainContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .userCommentNeeds()
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<String>(context) {
+                .subscribe(new BaseObserver<String>(context) {
                     @Override
                     public void onSuccess(String result) {
                         callBack.onNext(result);
@@ -86,7 +84,7 @@ public class MainModel implements MainContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .noticeNoRead()
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<NoticeNoReadBean>(context) {
+                .subscribe(new BaseObserver<NoticeNoReadBean>(context) {
                     @Override
                     public void onSuccess(NoticeNoReadBean result) {
                         callBack.onNext(result);

@@ -1,6 +1,5 @@
 package com.dingdingyijian.ddyj.utils;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 /**
@@ -13,7 +12,7 @@ public class LoginUtils {
      * @return
      */
     @SuppressWarnings("unused")
-    public static boolean isLogin(Context context) {
+    public static boolean isLogin() {
         if(TextUtils.isEmpty(PreferenceUtil.getInstance().getString(ConstantOther.KEY_APP_TOKEN))) {
             return false;
         }

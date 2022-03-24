@@ -22,7 +22,7 @@ import io.reactivex.rxjava3.disposables.Disposable;
  *
  * @param <T>
  */
-public abstract class ObserverCall<T> implements Observer<BaseResponse<T>> {
+public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
     //是否显示加载进度
     private boolean mShowDialog;
     //加载进度框
@@ -37,12 +37,12 @@ public abstract class ObserverCall<T> implements Observer<BaseResponse<T>> {
     public abstract void onFailure(Throwable e, String errorMsg);
 
 
-    public ObserverCall(Context context, boolean showDialog) {
+    public BaseObserver(Context context, boolean showDialog) {
         this.mContext = context;
         this.mShowDialog = showDialog;
     }
 
-    public ObserverCall(Context context) {
+    public BaseObserver(Context context) {
         this(context, true);
     }
 
@@ -96,7 +96,7 @@ public abstract class ObserverCall<T> implements Observer<BaseResponse<T>> {
 
     //取消订阅
     public void onCancelRequest() {
-        if (mDisposable != null && mDisposable.isDisposed()) {
+        if (mDisposable != null) {
             mDisposable.dispose();
         }
         cancelShowDialog();

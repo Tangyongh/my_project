@@ -21,28 +21,22 @@ import com.dingdingyijian.ddyj.R;
  */
 
 public class CustomToast {
-    private static TextView mMessage;
 
     public static void showToast(Context context, String message) {
-        try {
-            //加载Toast布局
-            @SuppressLint("InflateParams") View toastRoot = LayoutInflater.from(context).inflate(R.layout.custom_toast, null);
-            //初始化布局控件
-            mMessage = toastRoot.findViewById(R.id.tv_message);
-            //为控件设置属性
-            mMessage.setText(message);
-            //Toast的初始化
-            Toast toastStart = new Toast(context);
-            //获取屏幕高度
-            WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-            int height = wm.getDefaultDisplay().getHeight();
-            toastStart.setGravity(Gravity.TOP, 0, height / 2 - 20);
-            toastStart.setDuration(Toast.LENGTH_SHORT);
-            toastStart.setView(toastRoot);
-            toastStart.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        //加载Toast布局
+        @SuppressLint("InflateParams") View toastRoot = LayoutInflater.from(context).inflate(R.layout.custom_toast, null);
+        //初始化布局控件
+        TextView textView = toastRoot.findViewById(R.id.tv_message);
+        //为控件设置属性
+        textView.setText(message);
+        //Toast的初始化
+        Toast toastStart = new Toast(context);
+        //获取屏幕高度
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        toastStart.setGravity(Gravity.TOP, 0, height / 2 - 20);
+        toastStart.setDuration(Toast.LENGTH_SHORT);
+        toastStart.setView(toastRoot);
+        toastStart.show();
     }
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 import com.dingdingyijian.ddyj.api.RetrofitUtil;
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
 import com.dingdingyijian.ddyj.mvp.contract.ForgetPwdContract;
-import com.dingdingyijian.ddyj.net.callback.ObserverCall;
+import com.dingdingyijian.ddyj.net.callback.BaseObserver;
 import com.dingdingyijian.ddyj.net.callback.RxHelper;
 import com.dingdingyijian.ddyj.utils.ConstantUtils;
 
@@ -30,7 +30,7 @@ public class ForgetPwdModel implements ForgetPwdContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .forgetPwd(ConstantUtils.convertMapToBody(hashMap))
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<String>(context) {
+                .subscribe(new BaseObserver<String>(context) {
                     @Override
                     public void onSuccess(String result) {
                         callBack.onNext(result);
@@ -56,7 +56,7 @@ public class ForgetPwdModel implements ForgetPwdContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .userSendCode(mobile, type)
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<String>(context) {
+                .subscribe(new BaseObserver<String>(context) {
 
 
                     @Override

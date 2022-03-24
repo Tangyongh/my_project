@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import com.dingdingyijian.ddyj.AppConfig;
 import com.dingdingyijian.ddyj.net.BaseUrlInterceptor;
 import com.dingdingyijian.ddyj.net.HeadInterceptor;
+import com.dingdingyijian.ddyj.net.LogInterceptor;
 import com.dingdingyijian.ddyj.net.callback.CustomGsonConverterFactory;
 import com.dingdingyijian.ddyj.utils.Logger;
 import com.google.gson.Gson;
@@ -69,7 +70,7 @@ public class RetrofitUtil {
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)//设置出现错误进行重新连接。
                 .addInterceptor(new BaseUrlInterceptor())
-                .addInterceptor(loggingInterceptor)
+                .addInterceptor(new LogInterceptor())
                 .addInterceptor(new HeadInterceptor())
                 .sslSocketFactory(createSSLSocketFactory(), new TrustAllCerts())
                 .hostnameVerifier(new TrustAllHostnameVerifier())

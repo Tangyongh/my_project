@@ -5,15 +5,15 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.ConstantUtils;
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 
 @Route(path = Constant.PATH_SPLASH)
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends RxAppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,7 @@ public class SplashActivity extends AppCompatActivity {
      * 跳转到引导页
      */
     private void toGuideActivity() {
-        ARouter.getInstance().build(Constant.PATH_GUIDE).navigation();
+        ARouter.getInstance().build(Constant.PATH_GUIDE).greenChannel().navigation();
         finish();
     }
 
@@ -44,7 +44,8 @@ public class SplashActivity extends AppCompatActivity {
      * 跳转到主页
      */
     private void toNextActivity() {
-        ARouter.getInstance().build(Constant.PATH_MAIN).navigation();
+        //greenChannel  表示所有的拦截器失效
+        ARouter.getInstance().build(Constant.PATH_MAIN).greenChannel().navigation();
         finish();
     }
 
@@ -60,13 +61,5 @@ public class SplashActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 }

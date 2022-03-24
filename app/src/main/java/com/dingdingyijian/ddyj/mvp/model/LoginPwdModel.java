@@ -4,13 +4,11 @@ import android.content.Context;
 
 import com.dingdingyijian.ddyj.api.RetrofitUtil;
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
-import com.dingdingyijian.ddyj.base.BaseResponse;
 import com.dingdingyijian.ddyj.mvp.bean.LoginBean;
 import com.dingdingyijian.ddyj.mvp.contract.LoginPwdContract;
-import com.dingdingyijian.ddyj.net.callback.ObserverCall;
+import com.dingdingyijian.ddyj.net.callback.BaseObserver;
 import com.dingdingyijian.ddyj.net.callback.RxHelper;
 import com.dingdingyijian.ddyj.utils.ConstantUtils;
-import com.trello.rxlifecycle4.LifecycleTransformer;
 
 import java.util.HashMap;
 
@@ -29,7 +27,7 @@ public class LoginPwdModel implements LoginPwdContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .login(loginBean)
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<LoginBean>(context) {
+                .subscribe(new BaseObserver<LoginBean>(context) {
 
                     @Override
                     public void onSuccess(LoginBean result) {
@@ -55,7 +53,7 @@ public class LoginPwdModel implements LoginPwdContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .setAlias(ConstantUtils.convertMapToBody(hashMap))
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<String>(context,false) {
+                .subscribe(new BaseObserver<String>(context,false) {
 
                     @Override
                     public void onSuccess(String result) {
@@ -65,8 +63,6 @@ public class LoginPwdModel implements LoginPwdContract.Model {
                     public void onFailure(Throwable e, String errorMsg) {
                         callBack.onError(errorMsg);
                     }
-
                 });
-
     }
 }

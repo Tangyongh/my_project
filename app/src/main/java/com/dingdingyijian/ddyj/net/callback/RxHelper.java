@@ -27,8 +27,8 @@ public class RxHelper {
         return upstream -> {
             Observable<T> observable = upstream
                     .subscribeOn(Schedulers.io())
-                    .unsubscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread());
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io());
             return composeContext(context, observable);
         };
     }

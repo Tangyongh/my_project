@@ -97,7 +97,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
     @Override
     public void getMapViewIconResult(List<UserIconBean> userIconBean) {
         if (userIconBean == null) return;
-        if (userIconBean.size() >0){
+        if (userIconBean.size() > 0) {
             setMapData(userIconBean);
         }
     }
@@ -165,20 +165,20 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
      * 添加多个marker
      */
     public void setMapData(List<UserIconBean> userIconBean) {
-        List<UserIconBean> list = new ArrayList<>();
-        for (UserIconBean bean : userIconBean) {
-            list.add(bean);
-        }
+        if (userIconBean == null) return;
         getBinding().mapView.getMap().clear(true);
-        if (list.size() > 0) {
-            for (int i = 0; i < userIconBean.size(); i++) {
-                View markerViews = LayoutInflater.from(mContext).inflate(R.layout.marker_image, null, false);
-                getBinding().mapView.getMap().addMarker(new MarkerOptions()
-                        .position(new LatLng(list.get(i).getLat(), list.get(i).getLon()))//设置经度
-                        .setFlat(false) // 将Marker设置为贴地显示，可以双指下拉地图查看效果
-                        .draggable(false) //设置Marker可拖动
-                        .icon(BitmapDescriptorFactory.fromView(markerViews)));
+        List<UserIconBean> list = new ArrayList<>(userIconBean);
+        getBinding().mapView.post(() -> {
+            if (list.size() > 0) {
+                for (int i = 0; i < userIconBean.size(); i++) {
+                    View markerViews = LayoutInflater.from(mContext).inflate(R.layout.marker_image, null, false);
+                    getBinding().mapView.getMap().addMarker(new MarkerOptions()
+                            .position(new LatLng(list.get(i).getLat(), list.get(i).getLon()))//设置经度
+                            .setFlat(false) // 将Marker设置为贴地显示，可以双指下拉地图查看效果
+                            .draggable(false) //设置Marker可拖动
+                            .icon(BitmapDescriptorFactory.fromView(markerViews)));
+                }
             }
-        }
+        });
     }
 }

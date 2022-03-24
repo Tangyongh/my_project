@@ -94,7 +94,6 @@ public class LoginPwdActivity extends BaseActivity<LoginPwdContract.View, LoginP
             //secretExplain：用户使用协议
             ARouter.getInstance().build(Constant.PATH_WEB_CONTENT).withString("code", "secretExplain").navigation();
         });
-
     }
 
 
@@ -152,5 +151,11 @@ public class LoginPwdActivity extends BaseActivity<LoginPwdContract.View, LoginP
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UMShareAPI.get(this).release();
     }
 }

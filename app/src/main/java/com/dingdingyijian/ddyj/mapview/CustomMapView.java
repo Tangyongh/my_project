@@ -4,36 +4,26 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.View;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
-import com.amap.api.maps.AMapOptions;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.MapsInitializer;
 import com.amap.api.maps.UiSettings;
-import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
-import com.dingdingyijian.ddyj.R;
 import com.dingdingyijian.ddyj.mapview.listener.LocationCallback;
 import com.dingdingyijian.ddyj.mapview.listener.onMapViewChangeCallBack;
-import com.dingdingyijian.ddyj.mvp.bean.UserIconBean;
 import com.dingdingyijian.ddyj.utils.ComUtil;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.Logger;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author: DDYiJian
@@ -55,26 +45,22 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
 
     public CustomMapView(Context context) {
         super(context);
-
     }
 
     public CustomMapView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-
     }
 
     public CustomMapView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
-
     }
 
-
-    public void init(Context context, Bundle savedInstanceState,CustomMapView customMapView) {
+    public void init(Context context, Bundle savedInstanceState, CustomMapView customMapView) {
         this.mCustomMapView = customMapView;
-        mContext = context.getApplicationContext();
+        this.mContext = context.getApplicationContext();
         MapsInitializer.updatePrivacyShow(mContext, true, true);
         MapsInitializer.updatePrivacyAgree(mContext, true);
-        this.onCreate(savedInstanceState);
+        customMapView.onCreate(savedInstanceState);
         if (mAMap == null) {
             mAMap = customMapView.getMap();
             ComUtil.setMapStyleFile(mContext, mAMap);
@@ -130,7 +116,7 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
     }
 
 
-    public void activate(){
+    public void activate() {
         activate(mListener);
     }
 
@@ -204,15 +190,17 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
 
         } else {
             //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
-            Logger.d("","高德地图定位失败错误码===="+aMapLocation.getErrorCode()+",错误信息=="+aMapLocation.getErrorInfo());
+            Logger.d("", "高德地图定位失败错误码====" + aMapLocation.getErrorCode() + ",错误信息==" + aMapLocation.getErrorInfo());
         }
     }
 
     private LocationCallback mLocationCallback = null;
     private onMapViewChangeCallBack mChangeCallBack = null;
+
     public void setLocationCallback(LocationCallback listener) {
         this.mLocationCallback = listener;
     }
+
     public void setonMapViewChangeCallBack(onMapViewChangeCallBack listener) {
         this.mChangeCallBack = listener;
     }
@@ -225,6 +213,7 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
 
     /**
      * 地图移动停止后的回调
+     *
      * @param cameraPosition
      */
     @Override

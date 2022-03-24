@@ -172,6 +172,5 @@ public class RegisteredPresenter extends RegisteredContract.Presenter {
                 getRegistered(params);
             }
         });
-
     }
 }

@@ -9,7 +9,7 @@ import com.dingdingyijian.ddyj.mvp.bean.NeedsAcceptListBean;
 import com.dingdingyijian.ddyj.mvp.bean.NeedsCountBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserIconBean;
 import com.dingdingyijian.ddyj.mvp.contract.HomeFragmentContract;
-import com.dingdingyijian.ddyj.net.callback.ObserverCall;
+import com.dingdingyijian.ddyj.net.callback.BaseObserver;
 import com.dingdingyijian.ddyj.net.callback.RxHelper;
 
 import java.util.List;
@@ -33,7 +33,7 @@ public class HomeFragmentModel implements HomeFragmentContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .homeNeedsNotice(acceptListBean)
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<List<NeedsAcceptListBean>>(context, false) {
+                .subscribe(new BaseObserver<List<NeedsAcceptListBean>>(context, false) {
 
 
                     @Override
@@ -62,7 +62,7 @@ public class HomeFragmentModel implements HomeFragmentContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .banner(bannerBean)
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<BannerBean>(context, false) {
+                .subscribe(new BaseObserver<BannerBean>(context, false) {
 
                     @SuppressWarnings("unchecked")
                     @Override
@@ -93,7 +93,7 @@ public class HomeFragmentModel implements HomeFragmentContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .needsCount(uid)
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<NeedsCountBean>(context, false) {
+                .subscribe(new BaseObserver<NeedsCountBean>(context, false) {
 
                     @SuppressWarnings("unchecked")
                     @Override
@@ -123,7 +123,7 @@ public class HomeFragmentModel implements HomeFragmentContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .userHomeMapViewIcon(userIconBean)
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<List<UserIconBean>>(context, false) {
+                .subscribe(new BaseObserver<List<UserIconBean>>(context, false) {
                     @Override
                     public void onSuccess(List<UserIconBean> result) {
                         callBack.onNext(result);

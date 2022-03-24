@@ -7,21 +7,26 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingdingyijian.ddyj.R;
+import com.dingdingyijian.ddyj.api.RetrofitUtil;
 import com.dingdingyijian.ddyj.base.BaseFragment;
 import com.dingdingyijian.ddyj.databinding.FragmentPersonalBinding;
 import com.dingdingyijian.ddyj.event.LoginEvent;
 import com.dingdingyijian.ddyj.glide.GlideImage;
-import com.dingdingyijian.ddyj.mvp.data.DataInfoResult;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
 import com.dingdingyijian.ddyj.mvp.contract.PersonalFragmentContract;
+import com.dingdingyijian.ddyj.mvp.data.DataInfoResult;
 import com.dingdingyijian.ddyj.mvp.presenter.PersonalFragmentPresenter;
+import com.dingdingyijian.ddyj.net.callback.BaseObserver;
+import com.dingdingyijian.ddyj.net.callback.RxHelper;
+import com.dingdingyijian.ddyj.userinfo.LoginInfo;
 import com.dingdingyijian.ddyj.utils.ComUtil;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.LoginUtils;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
+import com.dingdingyijian.ddyj.utils.ToastUtil;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
 /**
@@ -52,6 +57,30 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
         setBanner();
         //消息监听
         onEvent();
+
+        getBinding().contentKf.setOnClickListener(v -> RetrofitUtil.getInstance().getApiService()
+                .logOut()
+                .compose(RxHelper.observableIO2Main(mContext))
+                .subscribe(new BaseObserver<String>(mContext) {
+                    @Override
+                    public void onSuccess(String result) {
+                        LoginInfo.cleanUserInfo();
+                        ToastUtil.showMsg("退出登录");
+                        LiveEventBus.get(LoginEvent.class).post(new LoginEvent());
+                    }
+
+                    @Override
+                    public void onFailure(Throwable e, String errorMsg) {
+                        ToastUtil.showMsg(errorMsg);
+                    }
+                }));
+
+        getBinding().contentVip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ARouter.getInstance().build(Constant.PATH_FORGET_PWD).navigation();
+            }
+        });
     }
 
 
@@ -128,7 +157,7 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
 
     //个人中心用户信息
     private void refreshUserInfo() {
-        if (LoginUtils.isLogin(mContext)) {
+        if (LoginUtils.isLogin()) {
             getPresenter().getUserCenter(PreferenceUtil.getInstance().getString(ConstantOther.KEY_APP_USER_ID));
             getBinding().content.setVisibility(View.VISIBLE);
             getBinding().btnLogin.setVisibility(View.GONE);

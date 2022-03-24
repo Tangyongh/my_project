@@ -56,11 +56,11 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     api rootProject.ext.dependencies["banner"]
     api rootProject.ext.dependencies["liveEventBus"]
+    api rootProject.ext.dependencies["immersionbar"]
+    debugImplementation rootProject.ext.dependencies["leakcanary"]
+    api rootProject.ext.dependencies["permissiolnx"]
     //日志
     api 'com.github.zhaokaiqiang.klog:library:1.6.0'
-    //状态栏
-    api 'com.gyf.immersionbar:immersionbar:3.0.0'
-    api rootProject.ext.dependencies["permissiolnx"]
     api 'com.dylanc:viewbinding-ktx:1.0.0'
 
 

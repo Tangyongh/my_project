@@ -30,7 +30,7 @@ public interface ApiService {
     @POST(ApiUrl.REGISTER_URL)
     Observable<BaseResponse<String>> registered(@Body RequestBody requestBody);
 
-    //获取验证码  type: userRegister:注册验证码,smsLogin:短信登录验证码,forgetPassword:找回密码验证码，oldMobile:旧手机验证码，newMobile:新手机验证码
+    //获取验证码
     @GET(ApiUrl.SEND_CODE_URL)
     Observable<BaseResponse<String>> userSendCode(@Query("mobile") String mobile, @Query("type") String type);
 

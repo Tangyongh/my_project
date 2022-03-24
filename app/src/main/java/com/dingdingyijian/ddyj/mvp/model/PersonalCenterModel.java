@@ -4,14 +4,12 @@ import android.content.Context;
 
 import com.dingdingyijian.ddyj.api.RetrofitUtil;
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
-import com.dingdingyijian.ddyj.base.BaseResponse;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
 import com.dingdingyijian.ddyj.mvp.contract.PersonalFragmentContract;
-import com.dingdingyijian.ddyj.net.callback.ObserverCall;
+import com.dingdingyijian.ddyj.net.callback.BaseObserver;
 import com.dingdingyijian.ddyj.net.callback.RxHelper;
-import com.trello.rxlifecycle4.LifecycleTransformer;
 
 /**
  * @author: tyh
@@ -32,7 +30,7 @@ public class PersonalCenterModel implements PersonalFragmentContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .userCenterInfo(uid)
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<UserCenterInfoBean>(context) {
+                .subscribe(new BaseObserver<UserCenterInfoBean>(context) {
                     @Override
                     public void onSuccess(UserCenterInfoBean result) {
                         callBack.onNext(result);
@@ -60,7 +58,7 @@ public class PersonalCenterModel implements PersonalFragmentContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .banner(bannerBean)
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<BannerBean>(context) {
+                .subscribe(new BaseObserver<BannerBean>(context) {
                     @Override
                     public void onSuccess(BannerBean result) {
                         callBack.onNext(result);
@@ -86,7 +84,7 @@ public class PersonalCenterModel implements PersonalFragmentContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .noticeNoRead()
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<NoticeNoReadBean>(context) {
+                .subscribe(new BaseObserver<NoticeNoReadBean>(context) {
                     @Override
                     public void onSuccess(NoticeNoReadBean result) {
                         callBack.onNext(result);
@@ -111,7 +109,7 @@ public class PersonalCenterModel implements PersonalFragmentContract.Model {
         RetrofitUtil.getInstance().getApiService()
                 .userCenterShare()
                 .compose(RxHelper.observableIO2Main(context))
-                .subscribe(new ObserverCall<String>(context) {
+                .subscribe(new BaseObserver<String>(context) {
                     @Override
                     public void onSuccess(String result) {
                         callBack.onNext(result);

@@ -7,7 +7,6 @@ import com.dingdingyijian.ddyj.net.BaseUrlInterceptor;
 import com.dingdingyijian.ddyj.net.HeadInterceptor;
 import com.dingdingyijian.ddyj.net.LogInterceptor;
 import com.dingdingyijian.ddyj.net.callback.CustomGsonConverterFactory;
-import com.dingdingyijian.ddyj.utils.Logger;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -23,7 +22,6 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 
@@ -55,12 +53,6 @@ public class RetrofitUtil {
                 .setPrettyPrinting() //对结果进行格式化，增加换行
                 .disableHtmlEscaping() //防止特殊字符出现乱码
                 .create();
-
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(message -> {
-            //打印retrofit日志
-            Logger.json(message);
-        });
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         //添加log拦截器
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .proxy(Proxy.NO_PROXY)

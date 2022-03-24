@@ -64,7 +64,7 @@ public class CustomGsonConverterFactory extends Converter.Factory {
         return new CustomGsonRequestBodyConverter<>(gson, adapter);
     }
 
-    final class CustomGsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
+    static final class CustomGsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
         private final MediaType MEDIA_TYPE = MediaType.parse("application/json; charset=UTF-8");
         private final Charset UTF_8 = StandardCharsets.UTF_8;
 
@@ -76,6 +76,7 @@ public class CustomGsonConverterFactory extends Converter.Factory {
             this.adapter = adapter;
         }
 
+        @SuppressWarnings("NullableProblems")
         @Override
         public RequestBody convert(T value) throws IOException {
             Buffer buffer = new Buffer();
@@ -87,7 +88,7 @@ public class CustomGsonConverterFactory extends Converter.Factory {
         }
     }
 
-    final class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
+    static final class CustomGsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
         private final Gson gson;
         private final TypeAdapter<T> adapter;
 
@@ -96,6 +97,7 @@ public class CustomGsonConverterFactory extends Converter.Factory {
             this.adapter = adapter;
         }
 
+        @SuppressWarnings("rawtypes")
         @Override
         public T convert(ResponseBody value) throws IOException {
             String result = value.string();

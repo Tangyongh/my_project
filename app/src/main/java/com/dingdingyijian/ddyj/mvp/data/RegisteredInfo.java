@@ -1,4 +1,4 @@
-package com.dingdingyijian.ddyj.userinfo;
+package com.dingdingyijian.ddyj.mvp.data;
 
 import android.text.TextUtils;
 
@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * @author: tyh
  * @date: 2022/3/19 23:11
- * @description:
+ * @description: 注册提交参数
  */
 public class RegisteredInfo {
 

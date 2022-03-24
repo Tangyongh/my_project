@@ -8,8 +8,8 @@ import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
 import com.dingdingyijian.ddyj.mvp.contract.PersonalFragmentContract;
-import com.dingdingyijian.ddyj.net.callback.BaseObserver;
-import com.dingdingyijian.ddyj.net.callback.RxHelper;
+import com.dingdingyijian.ddyj.api.BaseObserver;
+import com.dingdingyijian.ddyj.api.callback.RxHelper;
 
 /**
  * @author: tyh

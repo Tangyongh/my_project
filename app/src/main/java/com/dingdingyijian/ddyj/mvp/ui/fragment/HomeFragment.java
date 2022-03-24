@@ -13,7 +13,6 @@ import com.amap.api.maps.model.MarkerOptions;
 import com.dingdingyijian.ddyj.R;
 import com.dingdingyijian.ddyj.base.BaseFragment;
 import com.dingdingyijian.ddyj.databinding.FragmentHomeBinding;
-import com.dingdingyijian.ddyj.mapview.GeoCoderUtil;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NeedsAcceptListBean;
 import com.dingdingyijian.ddyj.mvp.bean.NeedsCountBean;
@@ -25,7 +24,6 @@ import com.dingdingyijian.ddyj.mvp.presenter.HomeFragmentPresenter;
 import com.dingdingyijian.ddyj.utils.Logger;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -171,7 +169,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
         getBinding().mapView.post(() -> {
             if (list.size() > 0) {
                 for (int i = 0; i < userIconBean.size(); i++) {
-                    View markerViews = LayoutInflater.from(mContext).inflate(R.layout.marker_image, null, false);
+                    @SuppressLint("InflateParams") View markerViews = LayoutInflater.from(mContext).inflate(R.layout.marker_image, null, false);
                     getBinding().mapView.getMap().addMarker(new MarkerOptions()
                             .position(new LatLng(list.get(i).getLat(), list.get(i).getLon()))//设置经度
                             .setFlat(false) // 将Marker设置为贴地显示，可以双指下拉地图查看效果

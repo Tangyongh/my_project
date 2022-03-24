@@ -20,7 +20,6 @@ import com.dingdingyijian.ddyj.base.BaseModelCallBack;
 import com.dingdingyijian.ddyj.mvp.bean.HtmlContentBean;
 import com.dingdingyijian.ddyj.mvp.contract.ProtocolWebViewContract;
 import com.dingdingyijian.ddyj.mvp.model.ProtocolWebViewModel;
-import com.dingdingyijian.ddyj.net.callback.RxHelper;
 import com.dingdingyijian.ddyj.utils.ToastUtil;
 
 /**

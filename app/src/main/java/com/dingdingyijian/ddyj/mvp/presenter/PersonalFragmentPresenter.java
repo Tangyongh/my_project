@@ -8,7 +8,6 @@ import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
 import com.dingdingyijian.ddyj.mvp.contract.PersonalFragmentContract;
 import com.dingdingyijian.ddyj.mvp.model.PersonalCenterModel;
-import com.dingdingyijian.ddyj.net.callback.RxHelper;
 import com.dingdingyijian.ddyj.utils.ToastUtil;
 
 /**

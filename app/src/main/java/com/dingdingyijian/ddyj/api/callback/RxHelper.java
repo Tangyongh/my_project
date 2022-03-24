@@ -1,4 +1,4 @@
-package com.dingdingyijian.ddyj.net.callback;
+package com.dingdingyijian.ddyj.api.callback;
 
 
 import android.content.Context;
@@ -12,7 +12,6 @@ import com.trello.rxlifecycle4.components.support.RxFragment;
 import com.trello.rxlifecycle4.components.support.RxFragmentActivity;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.core.FlowableTransformer;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.ObservableSource;
 import io.reactivex.rxjava3.core.ObservableTransformer;

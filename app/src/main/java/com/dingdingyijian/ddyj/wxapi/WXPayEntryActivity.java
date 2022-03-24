@@ -1,6 +1,5 @@
 package com.dingdingyijian.ddyj.wxapi;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,9 +7,10 @@ import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.trello.rxlifecycle4.components.RxActivity;
 
 @SuppressWarnings("all")
-public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
+public class WXPayEntryActivity extends RxActivity implements IWXAPIEventHandler {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

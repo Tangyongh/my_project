@@ -1,4 +1,4 @@
-package com.dingdingyijian.ddyj.net.callback;
+package com.dingdingyijian.ddyj.api.callback;
 
 
 /**

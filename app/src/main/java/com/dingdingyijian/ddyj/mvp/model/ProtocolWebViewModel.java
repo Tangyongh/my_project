@@ -6,8 +6,8 @@ import com.dingdingyijian.ddyj.api.RetrofitUtil;
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
 import com.dingdingyijian.ddyj.mvp.bean.HtmlContentBean;
 import com.dingdingyijian.ddyj.mvp.contract.ProtocolWebViewContract;
-import com.dingdingyijian.ddyj.net.callback.BaseObserver;
-import com.dingdingyijian.ddyj.net.callback.RxHelper;
+import com.dingdingyijian.ddyj.api.BaseObserver;
+import com.dingdingyijian.ddyj.api.callback.RxHelper;
 
 /**
  * @author: tyh

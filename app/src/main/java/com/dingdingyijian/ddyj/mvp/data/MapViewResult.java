@@ -20,6 +20,7 @@ public class MapViewResult {
      * @param mapView
      * @param iconLocation
      */
+    @SuppressWarnings("JavaDoc")
     public static void getMapView(Context context, Bundle savedInstanceState, CustomMapView mapView, ImageView iconLocation) {
         mapView.init(context, savedInstanceState, mapView);
         mapView.startLocation();

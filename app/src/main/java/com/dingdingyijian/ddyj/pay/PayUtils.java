@@ -1,13 +1,4 @@
-/*
-******************************* Copyright (c)*********************************\
-**
-**                 (c) Copyright 2017, King, china
-**                          All Rights Reserved
-**                                
-**                              By(King)
-**                         
-**------------------------------------------------------------------------------
-*/
+
 package com.dingdingyijian.ddyj.pay;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
  *      使用方法2：实例化payStrategy,直接调用其pay方法。如：new Alipay().pay(...)
  */
 public class PayUtils {
-    public static <T extends IPayInfo> void post(IPayStrategy<T> payWay, AppCompatActivity activity, T payinfo, IPayCallback callback){
-        payWay.pay(activity, payinfo, callback);
+    public static <T extends IPayInfo> void post(IPayStrategy<T> payWay, AppCompatActivity activity, T payInfo, IPayCallback callback){
+        payWay.pay(activity, payInfo, callback);
     }
 }

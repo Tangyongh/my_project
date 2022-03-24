@@ -1,4 +1,4 @@
-package com.dingdingyijian.ddyj.userinfo;
+package com.dingdingyijian.ddyj.mvp.data;
 
 import android.text.TextUtils;
 

@@ -1,27 +1,25 @@
 package com.dingdingyijian.ddyj.net;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 
 import com.dingdingyijian.ddyj.utils.Logger;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import okhttp3.Interceptor;
 
 /**
- *  TODO Log拦截器代码
+ * Log拦截器
  */
-public class LogInterceptor implements Interceptor{
-    private String TAG = "okhttp";
+public class LogInterceptor implements Interceptor {
 
+
+    @SuppressWarnings("NullableProblems")
     @Override
-    public okhttp3.Response intercept(@Nullable Chain chain) throws IOException {
-        long t1 = System.nanoTime();
+    public okhttp3.Response intercept(@NonNull Chain chain) throws IOException {
         okhttp3.Response response = chain.proceed(chain.request());
-        long t2 = System.nanoTime();
-      //  Logger.e(TAG, String.format(Locale.getDefault(), "Received response for %s in %.1fms%n%s",
-          //      response.request().url(), (t2 - t1) / 1e6d, response.headers()));
+        Logger.e("LogInterceptor", response.request().url() + "");
+        assert response.body() != null;
         okhttp3.MediaType mediaType = response.body().contentType();
         String content = response.body().string();
         Logger.json(content);

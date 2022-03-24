@@ -35,7 +35,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 public class WXPay implements IPayStrategy<WXPayInfo> {
 
     private static WXPay mWXPay;
-    private WXPayInfo payInfoImpli;
+    private WXPayInfo mWXPayInfo;
     private static IPayCallback sPayCallback;
     private IWXAPI mWXApi;
     private boolean initialization;
@@ -67,13 +67,13 @@ public class WXPay implements IPayStrategy<WXPayInfo> {
 
     @Override
     public void pay(AppCompatActivity activity, WXPayInfo payInfo, IPayCallback payCallback) {
-        this.payInfoImpli = payInfo;
+        this.mWXPayInfo = payInfo;
         sPayCallback = payCallback;
 
-        if (payInfoImpli == null || TextUtils.isEmpty(payInfoImpli.getAppid()) || TextUtils.isEmpty(payInfoImpli.getPartnerid())
-                || TextUtils.isEmpty(payInfoImpli.getPrepayId()) || TextUtils.isEmpty(payInfoImpli.getPackageValue()) ||
-                TextUtils.isEmpty(payInfoImpli.getNonceStr()) || TextUtils.isEmpty(payInfoImpli.getTimestamp()) ||
-                TextUtils.isEmpty(payInfoImpli.getSign())) {
+        if (mWXPayInfo == null || TextUtils.isEmpty(mWXPayInfo.getAppid()) || TextUtils.isEmpty(mWXPayInfo.getPartnerid())
+                || TextUtils.isEmpty(mWXPayInfo.getPrepayId()) || TextUtils.isEmpty(mWXPayInfo.getPackageValue()) ||
+                TextUtils.isEmpty(mWXPayInfo.getNonceStr()) || TextUtils.isEmpty(mWXPayInfo.getTimestamp()) ||
+                TextUtils.isEmpty(mWXPayInfo.getSign())) {
             if (payCallback != null) {
                 payCallback.onError(WXErrCodeEx.CODE_ILLEGAL_ARGURE, WXErrCodeEx.getMessageByCode(WXErrCodeEx.CODE_ILLEGAL_ARGURE));
             }
@@ -81,7 +81,7 @@ public class WXPay implements IPayStrategy<WXPayInfo> {
         }
 
         if (!initialization) {
-            initWXApi(activity.getApplicationContext(), payInfoImpli.getAppid());
+            initWXApi(activity.getApplicationContext(), mWXPayInfo.getAppid());
         }
 
         if (!check()) {
@@ -91,13 +91,13 @@ public class WXPay implements IPayStrategy<WXPayInfo> {
             return;
         }
         PayReq req = new PayReq();
-        req.appId = payInfoImpli.getAppid();
-        req.partnerId = payInfoImpli.getPartnerid();
-        req.prepayId = payInfoImpli.getPrepayId();
-        req.packageValue = payInfoImpli.getPackageValue();
-        req.nonceStr = payInfoImpli.getNonceStr();
-        req.timeStamp = payInfoImpli.getTimestamp();
-        req.sign = payInfoImpli.getSign();
+        req.appId = mWXPayInfo.getAppid();
+        req.partnerId = mWXPayInfo.getPartnerid();
+        req.prepayId = mWXPayInfo.getPrepayId();
+        req.packageValue = mWXPayInfo.getPackageValue();
+        req.nonceStr = mWXPayInfo.getNonceStr();
+        req.timeStamp = mWXPayInfo.getTimestamp();
+        req.sign = mWXPayInfo.getSign();
         mWXApi.sendReq(req);
     }
 

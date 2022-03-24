@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewbinding.ViewBinding;
 
-import com.dingdingyijian.ddyj.utils.LogUtils;
 import com.dylanc.viewbinding.ViewBindingUtil;
 import com.trello.rxlifecycle4.components.support.RxFragment;
 
@@ -113,7 +112,6 @@ public abstract class BaseLazyFragment<V extends BaseViewImp, P extends BasePres
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        LogUtils.e("----->" + isVisibleToUser);
         if (isVisibleToUser && !isLoadDataComplete && isViewCreated) {
             isLoadDataComplete = true;
             initData();

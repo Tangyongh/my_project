@@ -18,9 +18,9 @@ import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
 import com.dingdingyijian.ddyj.mvp.contract.PersonalFragmentContract;
 import com.dingdingyijian.ddyj.mvp.data.DataInfoResult;
 import com.dingdingyijian.ddyj.mvp.presenter.PersonalFragmentPresenter;
-import com.dingdingyijian.ddyj.net.callback.BaseObserver;
-import com.dingdingyijian.ddyj.net.callback.RxHelper;
-import com.dingdingyijian.ddyj.userinfo.LoginInfo;
+import com.dingdingyijian.ddyj.api.BaseObserver;
+import com.dingdingyijian.ddyj.api.callback.RxHelper;
+import com.dingdingyijian.ddyj.mvp.data.LoginInfo;
 import com.dingdingyijian.ddyj.utils.ComUtil;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
@@ -75,12 +75,7 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
                     }
                 }));
 
-        getBinding().contentVip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ARouter.getInstance().build(Constant.PATH_FORGET_PWD).navigation();
-            }
-        });
+        getBinding().contentVip.setOnClickListener(v -> ARouter.getInstance().build(Constant.PATH_FORGET_PWD).navigation());
     }
 
 

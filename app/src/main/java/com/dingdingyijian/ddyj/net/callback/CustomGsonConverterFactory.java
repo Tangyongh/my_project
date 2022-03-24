@@ -1,5 +1,6 @@
 package com.dingdingyijian.ddyj.net.callback;
 
+import com.dingdingyijian.ddyj.api.callback.ApiException;
 import com.dingdingyijian.ddyj.base.BaseResponse;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;

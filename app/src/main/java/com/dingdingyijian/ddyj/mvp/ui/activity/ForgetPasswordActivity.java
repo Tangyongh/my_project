@@ -40,6 +40,7 @@ public class ForgetPasswordActivity extends BaseActivity<ForgetPwdContract.View,
     protected void initView(Bundle savedInstanceState) {
         onClickListener();
     }
+
     //点击事件
     private void onClickListener() {
         BLButton btnSetPwd = getBinding().btnSetPwd;
@@ -49,23 +50,23 @@ public class ForgetPasswordActivity extends BaseActivity<ForgetPwdContract.View,
         EditText etPwd = getBinding().etPwd;
         EditText etPwdConfirm = getBinding().etPwdConfirm;
         //点击获取验证码
-        getPresenter().clickSendCode(sendCodeTV,etPhone);
+        getPresenter().clickSendCode(sendCodeTV, etPhone);
         //点击修改新密码
-        getPresenter().clickSetPassword(btnSetPwd,etPhone,etCode,etPwd,etPwdConfirm);
+        getPresenter().clickSetPassword(btnSetPwd, etPhone, etCode, etPwd, etPwdConfirm);
         //点击关闭页面
         getBinding().toolbar.contentBack.setOnClickListener(v -> finish());
         //拨打客服电话
         getBinding().contentCall.setOnClickListener(v -> ConstantUtils.jumCall(mContext));
         //点击密码是否明文显示
-        getBinding().btnGone.setOnClickListener(v -> getPresenter().clickVisibilityOrGone(etPwd,getBinding().btnGone));
-        getBinding().btnGoneConfirm.setOnClickListener(v -> getPresenter().clickVisibilityOrGone(etPwdConfirm,getBinding().btnGoneConfirm));
+        getBinding().btnGone.setOnClickListener(v -> getPresenter().clickVisibilityOrGone(etPwd, getBinding().btnGone));
+        getBinding().btnGoneConfirm.setOnClickListener(v -> getPresenter().clickVisibilityOrGone(etPwdConfirm, getBinding().btnGoneConfirm));
     }
 
     //修改新密码成功
     @Override
     public void getSetPasswordResult() {
         ToastUtil.showMsg("修改密码成功");
-        LiveEventBus.get("register_success",String.class).post(getBinding().etPhone.getText().toString().trim());
+        LiveEventBus.get("register_success", String.class).post(getBinding().etPhone.getText().toString().trim());
         finish();
     }
 
@@ -76,6 +77,7 @@ public class ForgetPasswordActivity extends BaseActivity<ForgetPwdContract.View,
         mDownTimerUtils = new CountDownTimerUtils(getBinding().sendCodeTV, 60000, 1000);
         mDownTimerUtils.start();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

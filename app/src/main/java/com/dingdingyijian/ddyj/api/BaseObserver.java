@@ -1,10 +1,11 @@
-package com.dingdingyijian.ddyj.net.callback;
+package com.dingdingyijian.ddyj.api;
 
 
 import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingdingyijian.ddyj.base.BaseResponse;
+import com.dingdingyijian.ddyj.api.callback.ApiException;
 import com.dingdingyijian.ddyj.utils.ComUtil;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.Logger;
@@ -103,7 +104,7 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
     }
 
 
-    //接口请求返回的状态code
+    //接口请求失败返回的状态code
     private void getCode(int code) {
         Logger.d("Observer执行了==", "code===================" + code);
         switch (code) {

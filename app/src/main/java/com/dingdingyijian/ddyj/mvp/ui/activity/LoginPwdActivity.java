@@ -17,7 +17,7 @@ import com.dingdingyijian.ddyj.jpush.ExampleUtil;
 import com.dingdingyijian.ddyj.mvp.bean.LoginBean;
 import com.dingdingyijian.ddyj.mvp.contract.LoginPwdContract;
 import com.dingdingyijian.ddyj.mvp.presenter.LoginPwdPresenter;
-import com.dingdingyijian.ddyj.userinfo.LoginInfo;
+import com.dingdingyijian.ddyj.mvp.data.LoginInfo;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;

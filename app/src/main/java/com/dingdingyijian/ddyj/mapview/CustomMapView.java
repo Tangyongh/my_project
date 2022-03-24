@@ -32,16 +32,17 @@ import com.dingdingyijian.ddyj.utils.PreferenceUtil;
  */
 public class CustomMapView extends MapView implements LocationSource, AMapLocationListener, AMap.OnCameraChangeListener {
 
-    private Context mContext;
+
     private AMap mAMap;
-    private OnLocationChangedListener mListener;
-    private AMapLocationClient mLocationClient;
-    private AMapLocationClientOption mLocationOption;
-    private MyLocationStyle myLocationStyle;
+    private Context mContext;
     private boolean isFirstLoc = true;
     private double latitude = 0;
     private double longitude = 0;
-    private CustomMapView mCustomMapView;
+    private OnLocationChangedListener mListener;
+    private AMapLocationClient mLocationClient;
+    private LocationCallback mLocationCallback = null;
+    private onMapViewChangeCallBack mChangeCallBack = null;
+
 
     public CustomMapView(Context context) {
         super(context);
@@ -56,7 +57,6 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
     }
 
     public void init(Context context, Bundle savedInstanceState, CustomMapView customMapView) {
-        this.mCustomMapView = customMapView;
         this.mContext = context.getApplicationContext();
         MapsInitializer.updatePrivacyShow(mContext, true, true);
         MapsInitializer.updatePrivacyAgree(mContext, true);
@@ -73,7 +73,7 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
             // 是否显示定位按钮
             uiSettings.setMyLocationButtonEnabled(false);
             mAMap.setOnCameraChangeListener(this); //// 添加移动地图事件监听器
-            myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
+            MyLocationStyle myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
             //设置是否显示定位小蓝点
             myLocationStyle.showMyLocation(false);
             // 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
@@ -93,21 +93,19 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
             //设置定位回调监听
             mLocationClient.setLocationListener(this);
             //初始化定位参数
-            mLocationOption = new AMapLocationClientOption();
+            AMapLocationClientOption locationOption = new AMapLocationClientOption();
             //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
-            mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+            locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
             //设置是否返回地址信息（默认返回地址信息）
-            mLocationOption.setNeedAddress(true);
+            locationOption.setNeedAddress(true);
             //设置是否只定位一次,默认为false
-            mLocationOption.setOnceLocation(false);
-            //设置是否强制刷新WIFI，默认为强制刷新
-            mLocationOption.setWifiActiveScan(true);
+            locationOption.setOnceLocation(false);
             //设置是否允许模拟位置,默认为false，不允许模拟位置
-            mLocationOption.setMockEnable(false);
+            locationOption.setMockEnable(false);
             //设置定位间隔,单位毫秒,默认为2000ms，最低1000ms。
-            mLocationOption.setInterval(2000);
+            locationOption.setInterval(2000);
             //给定位客户端对象设置定位参数
-            mLocationClient.setLocationOption(mLocationOption);
+            mLocationClient.setLocationOption(locationOption);
             //启动定位
             mLocationClient.startLocation();
         } catch (Exception e) {
@@ -116,14 +114,13 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
     }
 
 
+    //激活定位
     public void activate() {
         activate(mListener);
     }
 
 
-    /**
-     * 回到当前位置
-     */
+    //回到当前位置
     public void moveCamera() {
         if (latitude != 0 && longitude != 0) {
             mAMap.moveCamera(CameraUpdateFactory.zoomTo(14));
@@ -131,17 +128,14 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
         }
     }
 
-    /**
-     * 激活定位
-     */
+
+    //激活定位
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
         mListener = onLocationChangedListener;
     }
 
-    /**
-     * 停止定位
-     */
+    //停止定位
     @Override
     public void deactivate() {
         mListener = null;
@@ -152,11 +146,8 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
         mLocationClient = null;
     }
 
-    /**
-     * 定位回调
-     *
-     * @param aMapLocation
-     */
+
+    //定位回调
     @Override
     public void onLocationChanged(AMapLocation aMapLocation) {
         if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
@@ -190,19 +181,9 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
 
         } else {
             //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+            assert aMapLocation != null;
             Logger.d("", "高德地图定位失败错误码====" + aMapLocation.getErrorCode() + ",错误信息==" + aMapLocation.getErrorInfo());
         }
-    }
-
-    private LocationCallback mLocationCallback = null;
-    private onMapViewChangeCallBack mChangeCallBack = null;
-
-    public void setLocationCallback(LocationCallback listener) {
-        this.mLocationCallback = listener;
-    }
-
-    public void setonMapViewChangeCallBack(onMapViewChangeCallBack listener) {
-        this.mChangeCallBack = listener;
     }
 
 
@@ -211,11 +192,8 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
 
     }
 
-    /**
-     * 地图移动停止后的回调
-     *
-     * @param cameraPosition
-     */
+
+    //地图移动停止后的回调
     @Override
     public void onCameraChangeFinish(CameraPosition cameraPosition) {
         if (cameraPosition != null && !TextUtils.isEmpty(cameraPosition.target.toString())) {
@@ -223,5 +201,16 @@ public class CustomMapView extends MapView implements LocationSource, AMapLocati
             mChangeCallBack.onCameraChangeFinish(latLngEntity);
         }
     }
+
+    //定位成功回调接口
+    public void setLocationCallback(LocationCallback listener) {
+        this.mLocationCallback = listener;
+    }
+
+    //地图移动完成之后回调接口
+    public void setonMapViewChangeCallBack(onMapViewChangeCallBack listener) {
+        this.mChangeCallBack = listener;
+    }
+
 
 }

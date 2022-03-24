@@ -10,7 +10,6 @@ import com.dingdingyijian.ddyj.R;
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
 import com.dingdingyijian.ddyj.mvp.contract.ForgetPwdContract;
 import com.dingdingyijian.ddyj.mvp.model.ForgetPwdModel;
-import com.dingdingyijian.ddyj.net.callback.RxHelper;
 import com.dingdingyijian.ddyj.utils.ComUtil;
 import com.dingdingyijian.ddyj.utils.ConstantUtils;
 import com.dingdingyijian.ddyj.utils.ToastUtil;

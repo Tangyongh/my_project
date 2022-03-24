@@ -13,7 +13,7 @@ import com.dingdingyijian.ddyj.jpush.ExampleUtil;
 import com.dingdingyijian.ddyj.mvp.bean.LoginBean;
 import com.dingdingyijian.ddyj.mvp.contract.LoginCodeContract;
 import com.dingdingyijian.ddyj.mvp.presenter.LoginCodePresenter;
-import com.dingdingyijian.ddyj.userinfo.LoginInfo;
+import com.dingdingyijian.ddyj.mvp.data.LoginInfo;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.CountDownTimerUtils;

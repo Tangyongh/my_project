@@ -13,14 +13,7 @@ package com.dingdingyijian.ddyj.wxapi;
 
 import com.dingdingyijian.ddyj.pay.IPayInfo;
 
-/**
- * 文 件 名: WXPayInfoImpli
- * 创 建 人: King
- * 创建日期: 2017/2/13 17:09
- * 邮   箱: mikey1101@163.com
- * 博   客: www.smilevenus.com
- * 描述 ：
- */
+
 public class WXPayInfo implements IPayInfo {
     /**
      * sign : ECE311C3DF76E009E6F37F05C350625F

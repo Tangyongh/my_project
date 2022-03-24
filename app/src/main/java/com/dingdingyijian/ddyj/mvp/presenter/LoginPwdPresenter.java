@@ -14,8 +14,7 @@ import com.dingdingyijian.ddyj.base.BaseModelCallBack;
 import com.dingdingyijian.ddyj.mvp.bean.LoginBean;
 import com.dingdingyijian.ddyj.mvp.contract.LoginPwdContract;
 import com.dingdingyijian.ddyj.mvp.model.LoginPwdModel;
-import com.dingdingyijian.ddyj.net.callback.RxHelper;
-import com.dingdingyijian.ddyj.userinfo.LoginInfo;
+import com.dingdingyijian.ddyj.mvp.data.LoginInfo;
 import com.dingdingyijian.ddyj.utils.ComUtil;
 import com.dingdingyijian.ddyj.utils.ToastUtil;
 import com.noober.background.view.BLButton;
@@ -31,6 +30,7 @@ import java.util.Map;
  * @time: 2022/3/9
  * @describe: 登录
  */
+@SuppressWarnings("all")
 public class LoginPwdPresenter extends LoginPwdContract.Presenter {
 
     private Context context;

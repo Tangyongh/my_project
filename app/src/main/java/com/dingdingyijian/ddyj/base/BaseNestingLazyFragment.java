@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.dingdingyijian.ddyj.utils.LogUtils;
 import com.trello.rxlifecycle4.components.support.RxFragment;
 
 import java.util.List;
@@ -39,7 +38,6 @@ public abstract class BaseNestingLazyFragment<V extends BaseViewImp, P extends B
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtils.e("-----> onCreateView");
         if (rootView == null) {
             rootView = inflater.inflate(getLayoutId(), container, false);
             mContext = getActivity();
@@ -70,7 +68,6 @@ public abstract class BaseNestingLazyFragment<V extends BaseViewImp, P extends B
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        LogUtils.e("----->" + isVisibleToUser);
         if (isViewCreated) {
             //Fragment可见且状态不是可见(从一个Fragment切换到另外一个Fragment,后一个设置状态为可见)
             if (isVisibleToUser && !currentVisibleState) {
@@ -85,7 +82,6 @@ public abstract class BaseNestingLazyFragment<V extends BaseViewImp, P extends B
     @Override
     public void onStart() {
         super.onStart();
-        LogUtils.e("-----> onStart");
         //isHidden()是Fragment是否处于隐藏状态和isVisible()有区别
         //getUserVisibleHint(),Fragement是否可见
         if (!isHidden() && getUserVisibleHint()) {//如果Fragment没有隐藏且可见
@@ -98,7 +94,6 @@ public abstract class BaseNestingLazyFragment<V extends BaseViewImp, P extends B
     @Override
     public void onResume() {
         super.onResume();
-        LogUtils.e("-----> onResume");
         if (!mIsFirstVisible) {
             //表示点击home键又返回操作,设置可见状态为ture
             if (!isHidden() && !getUserVisibleHint() && currentVisibleState) {
@@ -110,7 +105,6 @@ public abstract class BaseNestingLazyFragment<V extends BaseViewImp, P extends B
     @Override
     public void onPause() {
         super.onPause();
-        LogUtils.e("-----> onPause");
         //表示点击home键,原来可见的Fragment要走该方法，更改Fragment的状态为不可见
         if (!isHidden() && getUserVisibleHint()) {
             disPatchFragment(false);
@@ -120,7 +114,6 @@ public abstract class BaseNestingLazyFragment<V extends BaseViewImp, P extends B
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        LogUtils.e("-----> onDestroyView");
         //当 View 被销毁的时候我们需要重新设置 isViewCreated mIsFirstVisible 的状态
         isViewCreated = false;
         mIsFirstVisible = true;
@@ -181,15 +174,12 @@ public abstract class BaseNestingLazyFragment<V extends BaseViewImp, P extends B
 
     //Fragemnet首次可见的方法
     public void onFragmentFirst() {
-        LogUtils.e("首次可见");
     }
     //Fragemnet可见的方法
     public void onFragmentVisble() {//子Fragment调用次方法，执行可见操作
-        LogUtils.e("可见");
     }
     //Fragemnet不可见的方法
     public void onFragmentInVisible() {
-        LogUtils.e("不可见");
     }
 
     /**

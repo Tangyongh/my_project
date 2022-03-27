@@ -3,12 +3,9 @@ package com.dingdingyijian.ddyj.net.helper;
 
 import android.content.Context;
 
-import com.dingdingyijian.ddyj.base.BaseViewImp;
-import com.trello.rxlifecycle4.LifecycleTransformer;
 import com.trello.rxlifecycle4.android.ActivityEvent;
 import com.trello.rxlifecycle4.components.RxActivity;
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
-import com.trello.rxlifecycle4.components.support.RxFragment;
 import com.trello.rxlifecycle4.components.support.RxFragmentActivity;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -43,23 +40,5 @@ public class RxHelper {
         }else {
             return observable;
         }
-    }
-
-    public static <T> LifecycleTransformer<T> bindToLifecycle(BaseViewImp view) {
-        if (view instanceof RxAppCompatActivity) {
-            return ((RxAppCompatActivity) view).bindToLifecycle();
-        } else if (view instanceof RxFragment) {
-            return ((RxFragment) view).bindToLifecycle();
-        } else {
-            throw new IllegalArgumentException("view isn't activity or fragment");
-        }
-    }
-
-
-    public static <T> ObservableTransformer<T, T> getSchedulerTransformer(){
-        return upstream -> upstream
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
     }
 }

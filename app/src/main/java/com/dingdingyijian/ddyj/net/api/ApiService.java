@@ -22,7 +22,7 @@ import retrofit2.http.Query;
 /**
  * @author: tyh
  * @date: 2022/3/20 22:29
- * @description: api
+ * @description: api接口
  */
 public interface ApiService {
 

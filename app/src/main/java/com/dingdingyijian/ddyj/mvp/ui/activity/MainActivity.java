@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 /**
  * 主页
+ * git config --global http.sslVerify "false"
  */
 @Route(path = Constant.PATH_MAIN)
 public class MainActivity extends BaseActivity<MainContract.View, MainContract.Presenter, ActivityMainBinding> implements MainContract.View, OnTabSelectListener {

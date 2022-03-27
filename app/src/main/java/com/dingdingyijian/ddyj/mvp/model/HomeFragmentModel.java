@@ -2,15 +2,15 @@ package com.dingdingyijian.ddyj.mvp.model;
 
 import android.content.Context;
 
-import com.dingdingyijian.ddyj.api.RetrofitUtil;
+import com.dingdingyijian.ddyj.net.RetrofitUtil;
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NeedsAcceptListBean;
 import com.dingdingyijian.ddyj.mvp.bean.NeedsCountBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserIconBean;
 import com.dingdingyijian.ddyj.mvp.contract.HomeFragmentContract;
-import com.dingdingyijian.ddyj.api.BaseObserver;
-import com.dingdingyijian.ddyj.api.callback.RxHelper;
+import com.dingdingyijian.ddyj.net.BaseObserver;
+import com.dingdingyijian.ddyj.net.helper.RxHelper;
 
 import java.util.List;
 

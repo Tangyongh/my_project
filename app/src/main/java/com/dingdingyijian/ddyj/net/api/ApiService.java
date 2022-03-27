@@ -1,4 +1,4 @@
-package com.dingdingyijian.ddyj.api;
+package com.dingdingyijian.ddyj.net.api;
 
 import com.dingdingyijian.ddyj.base.BaseResponse;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;

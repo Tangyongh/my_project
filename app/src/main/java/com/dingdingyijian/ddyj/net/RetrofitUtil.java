@@ -1,12 +1,13 @@
-package com.dingdingyijian.ddyj.api;
+package com.dingdingyijian.ddyj.net;
 
 import android.annotation.SuppressLint;
 
 import com.dingdingyijian.ddyj.AppConfig;
-import com.dingdingyijian.ddyj.net.BaseUrlInterceptor;
-import com.dingdingyijian.ddyj.net.HeadInterceptor;
-import com.dingdingyijian.ddyj.net.LogInterceptor;
-import com.dingdingyijian.ddyj.net.callback.CustomGsonConverterFactory;
+import com.dingdingyijian.ddyj.net.helper.CustomGsonConverterFactory;
+import com.dingdingyijian.ddyj.net.interceptor.BaseUrlInterceptor;
+import com.dingdingyijian.ddyj.net.interceptor.HeadInterceptor;
+import com.dingdingyijian.ddyj.net.interceptor.LogInterceptor;
+import com.dingdingyijian.ddyj.net.api.ApiService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

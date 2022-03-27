@@ -1,11 +1,11 @@
-package com.dingdingyijian.ddyj.api;
+package com.dingdingyijian.ddyj.net;
 
 
 import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingdingyijian.ddyj.base.BaseResponse;
-import com.dingdingyijian.ddyj.api.callback.ApiException;
+import com.dingdingyijian.ddyj.net.helper.ApiException;
 import com.dingdingyijian.ddyj.utils.ComUtil;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.Logger;

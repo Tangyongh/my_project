@@ -1,5 +1,6 @@
 package com.dingdingyijian.ddyj;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
@@ -33,6 +34,7 @@ import me.jessyan.autosize.AutoSizeConfig;
  */
 public class App extends Application {
 
+    @SuppressLint("StaticFieldLeak")
     public static App instance;
     public Context mContext;
 

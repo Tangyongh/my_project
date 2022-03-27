@@ -32,7 +32,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 /**
  * @author: tyh
  * @date: 2022/3/19 3:40
- * @description:
+ * @description: 自定义gson解析器
  */
 public class CustomGsonConverterFactory extends Converter.Factory {
 

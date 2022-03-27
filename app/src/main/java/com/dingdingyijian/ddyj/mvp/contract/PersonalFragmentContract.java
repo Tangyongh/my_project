@@ -1,15 +1,16 @@
 package com.dingdingyijian.ddyj.mvp.contract;
 
 import android.content.Context;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
 import com.dingdingyijian.ddyj.base.BasePresenter;
-import com.dingdingyijian.ddyj.base.BaseResponse;
 import com.dingdingyijian.ddyj.base.BaseViewImp;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
-import com.trello.rxlifecycle4.LifecycleTransformer;
+import com.noober.background.view.BLRelativeLayout;
 
 /**
  * @author: DDYiJian
@@ -51,6 +52,10 @@ public interface PersonalFragmentContract {
 
         //推荐分享
         public abstract void getUserShare();
+
+        //设置用户信息
+        public abstract void setUserInfo(UserCenterInfoBean bean,
+                                         TextView tvUserName, ImageView ivUserFlag, ImageView userImage, TextView tvCreditScale, BLRelativeLayout contentCredit);
     }
 
 

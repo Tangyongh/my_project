@@ -27,8 +27,7 @@ public class LoginInterceptorImpl implements IInterceptor {
         } else { // 如果没有登录
             switch (path) {
                 //需要先登录
-                case Constant.PATH_FORGET_PWD:
-                case Constant.PATH_REGISTER:
+                case Constant.PATH_WEB_CONTENT:
                     callback.onInterrupt(null);
                     ARouter.getInstance().build(Constant.PATH_LOGIN_PWD).navigation();
                     break;

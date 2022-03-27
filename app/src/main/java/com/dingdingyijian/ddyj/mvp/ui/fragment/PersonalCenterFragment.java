@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingdingyijian.ddyj.R;
-import com.dingdingyijian.ddyj.api.RetrofitUtil;
 import com.dingdingyijian.ddyj.base.BaseFragment;
 import com.dingdingyijian.ddyj.databinding.FragmentPersonalBinding;
 import com.dingdingyijian.ddyj.event.LoginEvent;
@@ -18,15 +17,11 @@ import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
 import com.dingdingyijian.ddyj.mvp.contract.PersonalFragmentContract;
 import com.dingdingyijian.ddyj.mvp.data.DataInfoResult;
 import com.dingdingyijian.ddyj.mvp.presenter.PersonalFragmentPresenter;
-import com.dingdingyijian.ddyj.api.BaseObserver;
-import com.dingdingyijian.ddyj.api.callback.RxHelper;
-import com.dingdingyijian.ddyj.mvp.data.LoginInfo;
-import com.dingdingyijian.ddyj.utils.ComUtil;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.LoginUtils;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
-import com.dingdingyijian.ddyj.utils.ToastUtil;
+import com.ibd.tablayout.utils.UnreadMsgUtils;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
 /**
@@ -57,25 +52,6 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
         setBanner();
         //消息监听
         onEvent();
-
-        getBinding().contentKf.setOnClickListener(v -> RetrofitUtil.getInstance().getApiService()
-                .logOut()
-                .compose(RxHelper.observableIO2Main(mContext))
-                .subscribe(new BaseObserver<String>(mContext) {
-                    @Override
-                    public void onSuccess(String result) {
-                        LoginInfo.cleanUserInfo();
-                        ToastUtil.showMsg("退出登录");
-                        LiveEventBus.get(LoginEvent.class).post(new LoginEvent());
-                    }
-
-                    @Override
-                    public void onFailure(Throwable e, String errorMsg) {
-                        ToastUtil.showMsg(errorMsg);
-                    }
-                }));
-
-        getBinding().contentVip.setOnClickListener(v -> ARouter.getInstance().build(Constant.PATH_FORGET_PWD).navigation());
     }
 
 
@@ -102,36 +78,8 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
     @Override
     public void getUserCenterResult(UserCenterInfoBean bean) {
         if (bean == null) return;
-        PreferenceUtil.getInstance().commitString(ConstantOther.IDCARDVERIFY, bean.getIdcardVerify() + "");
-        PreferenceUtil.getInstance().commitString(ConstantOther.REAL_NAME, bean.getRealName());
-        PreferenceUtil.getInstance().commitString(ConstantOther.IDCARRDNO, bean.getIdcardNo());
-        PreferenceUtil.getInstance().commitString(ConstantOther.IS_SET_LOGIN_NAME, bean.getUserName());
-        PreferenceUtil.getInstance().commitString(ConstantOther.ACCEPT_DISTANCE, bean.getAcceptDistance());
-        PreferenceUtil.getInstance().commitString(ConstantOther.USER_ICON, bean.getAvatarUrl());
-        PreferenceUtil.getInstance().commitString(ConstantOther.IS_VIP, bean.getVipLevel());
-        //用戶头像
-        GlideImage.getInstance().loadImage(mContext, bean.getAvatarUrl(), R.mipmap.user_shape_icon, getBinding().userImage);
-        PreferenceUtil.getInstance().commitString(ConstantOther.KEY_APP_USER_ICON, bean.getAvatarUrl());
-        //用户名
-        if ("2".equals(bean.getIdcardVerify()) || "4".equals(bean.getIdcardVerify())) {
-            getBinding().tvUserName.setText(bean.getRealName());
-        } else {
-            getBinding().tvUserName.setText(ComUtil.getMobile(bean.getMobile()));
-        }
-        //区分普通会员和高级会员
-        String vipLevel = bean.getVipLevel();
-        getBinding().ivUserFlag.setImageResource("0".equals(vipLevel) ? R.mipmap.icon_vip_no : R.mipmap.icon_vip);
-        if (bean.isPledgeMoney()) {
-            getBinding().tvUserName.setCompoundDrawablesWithIntrinsicBounds(null, null, getResources().getDrawable(R.mipmap.icon_bzj), null);
-        } else {
-            getBinding().tvUserName.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-        }
-        UserCenterInfoBean.CreditUserModelBean creditUserModel = bean.getCreditUserModel();
-        if (creditUserModel != null) {
-            getBinding().contentCredit.setVisibility(View.VISIBLE);
-            getBinding().tvCreditScale.setText("信用积分:" + ComUtil.getFormatValue(creditUserModel.getCreditScore()) + "分");
-        }
-
+       getPresenter().setUserInfo(bean,getBinding().tvUserName,getBinding().ivUserFlag,
+               getBinding().userImage,getBinding().tvCreditScale,getBinding().contentCredit);
     }
 
     @Override
@@ -140,9 +88,20 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
         DataInfoResult.getBannerResult(getBinding().banner, bannerBean);
     }
 
+    //未读消息
     @Override
     public void getNoticeNoReadResult(NoticeNoReadBean noticeNoReadBean) {
-
+        if (noticeNoReadBean == null) return;
+        int noReadNum = noticeNoReadBean.getNoReadNum();
+        if (noReadNum == 0) {
+            getBinding().tvMessageRead.setVisibility(View.GONE);
+        }
+        if (noReadNum > 0 && noReadNum < 100) {
+            UnreadMsgUtils.show(getBinding().tvMessageRead, noReadNum);
+        }
+        if (noReadNum > 99) {
+            UnreadMsgUtils.show(getBinding().tvMessageRead, 99);
+        }
     }
 
     @Override
@@ -154,12 +113,14 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
     private void refreshUserInfo() {
         if (LoginUtils.isLogin()) {
             getPresenter().getUserCenter(PreferenceUtil.getInstance().getString(ConstantOther.KEY_APP_USER_ID));
+            getPresenter().getNoticeNoRead();//未读消息接口
             getBinding().content.setVisibility(View.VISIBLE);
             getBinding().btnLogin.setVisibility(View.GONE);
             getBinding().ivUserFlag.setVisibility(View.VISIBLE);
             getBinding().userImage.setClickable(true);
         } else {
             //未登录的时候显示
+            getBinding().tvMessageRead.setVisibility(View.GONE);
             getBinding().content.setVisibility(View.GONE);
             getBinding().btnLogin.setVisibility(View.VISIBLE);
             getBinding().ivUserFlag.setVisibility(View.GONE);

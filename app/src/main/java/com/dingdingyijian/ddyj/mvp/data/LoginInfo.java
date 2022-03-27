@@ -6,6 +6,9 @@ import com.dingdingyijian.ddyj.mvp.bean.LoginBean;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
 
+/**
+ * 用户信息
+ */
 public class LoginInfo {
 
 
@@ -17,6 +20,7 @@ public class LoginInfo {
      * @param loginType 登录类型
      * @return
      */
+    @SuppressWarnings("JavaDoc")
     public static LoginBean getLoginBean(String userName, String pwd, String loginType) {
         //判断地图定位获取的位置信息是否为空
         if (TextUtils.isEmpty(PreferenceUtil.getInstance().getString(ConstantOther.KEY_APP_LONGITUDE)) ||
@@ -51,6 +55,7 @@ public class LoginInfo {
      *
      * @param loginBean
      */
+    @SuppressWarnings("JavaDoc")
     public static void setUserInfo(LoginBean loginBean) {
         PreferenceUtil.getInstance().commitString(ConstantOther.KEY_APP_PHONE, loginBean.getMobile()); //手机号
         PreferenceUtil.getInstance().commitString(ConstantOther.KEY_APP_TOKEN, loginBean.getLoginToken()); //token

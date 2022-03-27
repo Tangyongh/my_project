@@ -255,15 +255,15 @@
                                 android:src="@mipmap/icon_my_notice_bg" />
 
 
-                            <com.ibd.tablayout.widget.MsgView xmlns:mv="http://schemas.android.com/apk/res-auto"
+                            <com.ibd.tablayout.widget.MsgView
                                 android:id="@+id/tv_message_read"
                                 style="@style/wrapStyle"
                                 android:layout_marginLeft="@dimen/dp25"
                                 android:gravity="center"
                                 android:textColor="@color/text_color_white"
                                 android:textSize="@dimen/text_size_11"
-                                mv:mv_backgroundColor="@color/text_color"
-                                mv:mv_isRadiusHalfHeight="true" />
+                                app:mv_backgroundColor="@color/text_color"
+                                app:mv_isRadiusHalfHeight="true" />
 
                         </RelativeLayout>
 

@@ -66,7 +66,7 @@ public class GuideActivity extends RxAppCompatActivity {
         mBinding.cvGuideIndicator.setViewPager(mBinding.vpGuidePager);
 
         mBinding.btnGuideComplete.setOnClickListener(v -> {
-            ARouter.getInstance().build(Constant.PATH_MAIN).navigation();
+            ARouter.getInstance().build(Constant.PATH_MAIN).greenChannel().navigation();
             finish();
         });
     }

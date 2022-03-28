@@ -17,12 +17,19 @@ import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
 import com.dingdingyijian.ddyj.mvp.contract.PersonalFragmentContract;
 import com.dingdingyijian.ddyj.mvp.data.DataInfoResult;
 import com.dingdingyijian.ddyj.mvp.presenter.PersonalFragmentPresenter;
+import com.dingdingyijian.ddyj.net.BaseObserver;
+import com.dingdingyijian.ddyj.net.RetrofitUtil;
+import com.dingdingyijian.ddyj.net.helper.RxHelper;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
+import com.dingdingyijian.ddyj.utils.ConstantUtils;
 import com.dingdingyijian.ddyj.utils.LoginUtils;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
 import com.ibd.tablayout.utils.UnreadMsgUtils;
 import com.jeremyliao.liveeventbus.LiveEventBus;
+
+import okhttp3.MultipartBody;
+
 
 /**
  * 个人中心
@@ -78,8 +85,8 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
     @Override
     public void getUserCenterResult(UserCenterInfoBean bean) {
         if (bean == null) return;
-       getPresenter().setUserInfo(bean,getBinding().tvUserName,getBinding().ivUserFlag,
-               getBinding().userImage,getBinding().tvCreditScale,getBinding().contentCredit);
+        getPresenter().setUserInfo(bean, getBinding().tvUserName, getBinding().ivUserFlag,
+                getBinding().userImage, getBinding().tvCreditScale, getBinding().contentCredit);
     }
 
     @Override

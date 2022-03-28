@@ -13,10 +13,14 @@ import com.dingdingyijian.ddyj.mvp.bean.UserIconBean;
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 
 /**
@@ -93,4 +97,10 @@ public interface ApiService {
     //微信授权登录验证是否绑定手机号
     @POST(ApiUrl.USER_WX_BIND_URL)
     Observable<BaseResponse<String>> userWeiXinBind(@Body RequestBody requestBody);
+
+    //上传头像
+    @Multipart
+    @POST(ApiUrl.USER_UPLOAD_AVATAR_URL)
+    Observable<BaseResponse<String>> upLoadAvatar(@Part MultipartBody.Part file, @Part("userType") String userType, @Part("filePath") String filePath, @Part("uid") String uid);
+
 }

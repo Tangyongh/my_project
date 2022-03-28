@@ -7,7 +7,7 @@ import com.jeremyliao.liveeventbus.core.LiveEvent;
  * @date: 2022/3/21 23:41
  * @description: 刷新主页
  */
-public class LoginEvent implements LiveEvent {
+public class RefreshEvent implements LiveEvent {
 
 
 

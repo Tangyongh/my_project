@@ -23,5 +23,5 @@ public class ApiUrl {
     public static final String USER_COMMENT_NEEDS_URL = "needs/no-comment-needs";
     public static final String MAIN_AD_POPUP_URL = "adv/popup";
     public static final String USER_HOME_MAP_ICON_URL = "user/home-users";
-
+    public static final String USER_WX_BIND_URL = "user/weixin-bind";
 }

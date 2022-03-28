@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
-import com.dingdingyijian.ddyj.event.LoginEvent;
+import com.dingdingyijian.ddyj.event.RefreshEvent;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NeedsAcceptListBean;
 import com.dingdingyijian.ddyj.mvp.bean.NeedsCountBean;
@@ -130,7 +130,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
 
     @Override
     public void onEvent(TextView missNeeds, TextView myNeeds, TextView sendNeeds) {
-        LiveEventBus.get(LoginEvent.class).observe((LifecycleOwner) mContext, loginEvent -> {
+        LiveEventBus.get(RefreshEvent.class).observe((LifecycleOwner) mContext, loginEvent -> {
             //待处理信息
             setNeedsCount(missNeeds, myNeeds, sendNeeds);
         });

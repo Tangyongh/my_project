@@ -90,4 +90,7 @@ public interface ApiService {
     @POST(ApiUrl.USER_HOME_MAP_ICON_URL)
     Observable<BaseResponse<List<UserIconBean>>> userHomeMapViewIcon(@Body UserIconBean UserIconBean);
 
+    //微信授权登录验证是否绑定手机号
+    @POST(ApiUrl.USER_WX_BIND_URL)
+    Observable<BaseResponse<String>> userWeiXinBind(@Body RequestBody requestBody);
 }

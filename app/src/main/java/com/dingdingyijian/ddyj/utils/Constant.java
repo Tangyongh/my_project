@@ -24,5 +24,6 @@ public class Constant {
     public static final String PATH_FORGET_PWD = "/app/ForgetPasswordActivity";
     //富文本页面
     public static final String PATH_WEB_CONTENT = "/app/ProtocolWebViewActivity";
-
+    //微信登录绑定手机号
+    public static final String PATH_WX_BIND = "/app/WeiChatBindActivity";
 }

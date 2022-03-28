@@ -12,7 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingdingyijian.ddyj.base.BaseActivity;
 import com.dingdingyijian.ddyj.databinding.ActivityLoginpwdBinding;
-import com.dingdingyijian.ddyj.event.LoginEvent;
+import com.dingdingyijian.ddyj.event.RefreshEvent;
 import com.dingdingyijian.ddyj.jpush.ExampleUtil;
 import com.dingdingyijian.ddyj.mvp.bean.LoginBean;
 import com.dingdingyijian.ddyj.mvp.contract.LoginPwdContract;
@@ -104,7 +104,7 @@ public class LoginPwdActivity extends BaseActivity<LoginPwdContract.View, LoginP
         LoginInfo.setUserInfo(loginBean);
         setAlias(loginBean);
         //登录成功的时候发送消息，给主界面刷新下界面
-        LiveEventBus.get(LoginEvent.class).post(new LoginEvent());
+        LiveEventBus.get(RefreshEvent.class).post(new RefreshEvent());
         finish();
     }
 
@@ -134,7 +134,7 @@ public class LoginPwdActivity extends BaseActivity<LoginPwdContract.View, LoginP
         LiveEventBus.get("WeiChat_Bind", String.class).observe(this, s -> {
             //跳转绑定页面
             ARouter.getInstance()
-                    .build(Constant.PATH_GUIDE)
+                    .build(Constant.PATH_WX_BIND)
                     .withString("unionId", mUnionId)
                     .withString("name", mName)
                     .withString("openId", mOpenId)

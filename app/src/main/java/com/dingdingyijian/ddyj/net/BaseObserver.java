@@ -12,6 +12,7 @@ import com.dingdingyijian.ddyj.utils.Logger;
 import com.dingdingyijian.ddyj.utils.ToastUtil;
 import com.dingdingyijian.ddyj.view.LoadingProgressDialog;
 import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
@@ -63,13 +64,10 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
     @Override
     public void onSubscribe(Disposable d) {
         this.mDisposable = d;
-        if (loadingProgressDialog == null && mShowDialog) {
-            loadingProgressDialog = new LoadingProgressDialog();
-            loadingProgressDialog.createLoadingDialog(mContext);
-            loadingProgressDialog.showDialog();
-        }
+        showCustomProgressDialog();
         if (!ComUtil.isConnected(mContext)) {
-            ToastUtil.showMsg("未连接网络");
+            ToastUtil.showMsg("当前网络不可用，请检查网络设置");
+            onCancelRequest();
         }
     }
 
@@ -86,23 +84,32 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
     }
 
 
+    //取消订阅
+    public void onCancelRequest() {
+        if (mDisposable != null) {
+            mDisposable.dispose();
+        }
+        cancelCustomProgressDialog();
+    }
+
     //关闭进度加载
-    public void cancelShowDialog() {
+    public void cancelCustomProgressDialog() {
         if (loadingProgressDialog != null && mShowDialog) {
             loadingProgressDialog.closeDialog();
             loadingProgressDialog = null;
         }
     }
 
-
-    //取消订阅
-    public void onCancelRequest() {
-        if (mDisposable != null) {
-            mDisposable.dispose();
+    //加载进度框
+    public void showCustomProgressDialog() {
+        if (!ComUtil.isDestroy((RxAppCompatActivity) mContext)) {
+            if (loadingProgressDialog == null && mShowDialog) {
+                loadingProgressDialog = new LoadingProgressDialog();
+                loadingProgressDialog.createLoadingDialog(mContext);
+                loadingProgressDialog.showDialog();
+            }
         }
-        cancelShowDialog();
     }
-
 
     //接口请求失败返回的状态code
     private void getCode(int code) {

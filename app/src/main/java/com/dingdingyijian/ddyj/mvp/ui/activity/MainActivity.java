@@ -8,7 +8,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.dingdingyijian.ddyj.adapter.ViewPagerAdapter;
 import com.dingdingyijian.ddyj.base.BaseActivity;
 import com.dingdingyijian.ddyj.databinding.ActivityMainBinding;
-import com.dingdingyijian.ddyj.event.LoginEvent;
+import com.dingdingyijian.ddyj.event.RefreshEvent;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.contract.MainContract;
 import com.dingdingyijian.ddyj.mvp.presenter.MainPresenter;
@@ -73,7 +73,7 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
 
     //消息回调 (此处就是接收到登录或者退出登录做出的操作)
     private void onEvent() {
-        LiveEventBus.get(LoginEvent.class).observe(this, loginEvent -> {
+        LiveEventBus.get(RefreshEvent.class).observe(this, loginEvent -> {
             //刷新接口
             refreshNoticeNoRead();
         });

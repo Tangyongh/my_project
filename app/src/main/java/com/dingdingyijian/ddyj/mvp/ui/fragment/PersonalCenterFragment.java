@@ -9,7 +9,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.dingdingyijian.ddyj.R;
 import com.dingdingyijian.ddyj.base.BaseFragment;
 import com.dingdingyijian.ddyj.databinding.FragmentPersonalBinding;
-import com.dingdingyijian.ddyj.event.LoginEvent;
+import com.dingdingyijian.ddyj.event.RefreshEvent;
 import com.dingdingyijian.ddyj.glide.GlideImage;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
@@ -57,7 +57,7 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
 
     //登录成功或者退出登录的时候刷新下接口
     private void onEvent() {
-        LiveEventBus.get(LoginEvent.class).observe(this, loginEvent -> {
+        LiveEventBus.get(RefreshEvent.class).observe(this, loginEvent -> {
             //用户信息
             refreshUserInfo();
         });

@@ -13,6 +13,7 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.model.CustomMapStyleOptions;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -149,7 +150,7 @@ public class ComUtil {
     }
 
     //判断Activity是否Destroy
-    public static boolean isDestroy(Activity activity) {
+    public static boolean isDestroy(RxAppCompatActivity activity) {
         if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
             return true;
         } else {

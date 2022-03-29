@@ -109,6 +109,7 @@ public interface ApiService {
     @POST(ApiUrl.USER_AVATAR_URL)
     Observable<BaseResponse<String>> modifyUserAvatar(@Body RequestBody requestBody);
 
+    //用户信息
     @GET(ApiUrl.USER_HOME_INFO_URL)
     Observable<BaseResponse<UserInfoBean>> userInfo(@Query("uid") String uid);
 

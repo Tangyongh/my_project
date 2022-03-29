@@ -2,13 +2,18 @@ package com.dingdingyijian.ddyj.mvp.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
+import com.dingdingyijian.ddyj.R;
 import com.dingdingyijian.ddyj.base.BaseActivity;
 import com.dingdingyijian.ddyj.databinding.ActivityModifyBusinessCardBinding;
 import com.dingdingyijian.ddyj.event.RefreshEvent;
+import com.dingdingyijian.ddyj.glide.GlideApp;
+import com.dingdingyijian.ddyj.glide.GlideImage;
 import com.dingdingyijian.ddyj.mvp.bean.UserInfoBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserUpLoadBean;
 import com.dingdingyijian.ddyj.mvp.contract.ModifyBusinessCardContract;
@@ -39,7 +44,7 @@ public class ModifyBusinessCardActivity extends BaseActivity<ModifyBusinessCardC
         ModifyBusinessCardContract.Presenter, ActivityModifyBusinessCardBinding> implements ModifyBusinessCardContract.View {
 
     private String mImagePath; //上传图片路径
-   // private boolean isUpLoadAvatar = false; //是否上传过头像，关闭页面的时候刷新下个人中心接口
+    private boolean isUpLoadAvatar = false; //是否上传过头像，关闭页面的时候刷新下个人中心接口
 
     @Override
     public ModifyBusinessCardContract.Presenter createPresenter() {
@@ -72,7 +77,7 @@ public class ModifyBusinessCardActivity extends BaseActivity<ModifyBusinessCardC
 
     @Override
     public void getModifyUserAvatarResult() {
-       // isUpLoadAvatar = true;
+        isUpLoadAvatar = true;
         //用户信息
         getPresenter().getUserInfo(PreferenceUtil.getInstance().getString(ConstantOther.KEY_APP_USER_ID));
     }
@@ -113,7 +118,9 @@ public class ModifyBusinessCardActivity extends BaseActivity<ModifyBusinessCardC
 
     //发送消息，刷新主页接口
     private void onEvent() {
-        LiveEventBus.get(RefreshEvent.class).post(new RefreshEvent());
+        if (isUpLoadAvatar) {
+            LiveEventBus.get(RefreshEvent.class).post(new RefreshEvent());
+        }
     }
 
     //点击事件
@@ -130,5 +137,10 @@ public class ModifyBusinessCardActivity extends BaseActivity<ModifyBusinessCardC
             finish();
             onEvent();
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

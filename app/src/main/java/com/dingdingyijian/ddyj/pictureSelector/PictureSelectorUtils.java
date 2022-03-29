@@ -23,6 +23,7 @@ import com.luck.picture.lib.camera.CustomCameraView;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.style.PictureWindowAnimationStyle;
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 
 /**
  * @author tyh
@@ -50,7 +51,7 @@ public class PictureSelectorUtils {
     }
 
     @SuppressWarnings("deprecation")
-    public void PictureSelector(Activity activity, int maxSelectNum, int minSelectNum, int imageSpanCount) {
+    public void PictureSelector(RxAppCompatActivity activity, int maxSelectNum, int minSelectNum, int imageSpanCount) {
         if (!ComUtil.isDestroy(activity)) {
             int animationMode = AnimationType.ALPHA_IN_ANIMATION;
             PictureWindowAnimationStyle mWindowAnimationStyle = new PictureWindowAnimationStyle();

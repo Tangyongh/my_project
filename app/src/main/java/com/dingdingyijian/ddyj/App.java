@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import androidx.multidex.MultiDex;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dingdingyijian.ddyj.glide.GlideApp;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.Logger;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
@@ -143,9 +144,24 @@ public class App extends Application {
     }
 
     @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        // 清理所有图片内存缓存
+        GlideApp.get(this).onLowMemory();
+    }
+
+    @Override
     public void onTerminate() {
         super.onTerminate();
         ARouter.getInstance().destroy();
+    }
+
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+        //根据手机内存剩余情况清理图片内存缓存
+        GlideApp.get(this).onTrimMemory(level);
     }
 
     private void setRxJavaErrorHandler() {

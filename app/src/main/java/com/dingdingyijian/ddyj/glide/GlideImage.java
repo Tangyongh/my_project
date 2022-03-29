@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 import com.dingdingyijian.ddyj.utils.ComUtil;
+import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 
 /**
  * @author tyh
@@ -48,19 +49,17 @@ public class GlideImage {
      * @param imageView   显示图片控件
      */
     public void loadImage(Context context, Object url, int placeholder, ImageView imageView) {
-        if (!ComUtil.isDestroy((Activity) context)) {
+        if (!ComUtil.isDestroy((RxAppCompatActivity) context)) {
             GlideApp.with(context)
                     .load(url)
                     .centerCrop()
                     .placeholder(placeholder)
-                    .error(placeholder)
-                    .fallback(placeholder)
                     .into(imageView);
         }
     }
 
     public void loadImages(Context context, Object url, int placeholder, ImageView imageView) {
-        if (!ComUtil.isDestroy((Activity) context)) {
+        if (!ComUtil.isDestroy((RxAppCompatActivity) context)) {
             GlideApp.with(context)
                     .asBitmap()
                     .load(url)
@@ -81,7 +80,7 @@ public class GlideImage {
      * @param imageView
      */
     public void loadBannerImage(Context context, Object url, ImageView imageView) {
-        if (!ComUtil.isDestroy((Activity) context)) {
+        if (!ComUtil.isDestroy((RxAppCompatActivity) context)) {
             GlideApp.with(context)
                     .asBitmap()
                     .load(url)
@@ -98,7 +97,7 @@ public class GlideImage {
      * @param iv_close_ad
      */
     public void loadImageProgress(Context context, Object url, ImageView imageView, ImageView iv_close_ad) {
-        if (!ComUtil.isDestroy((Activity) context)) {
+        if (!ComUtil.isDestroy((RxAppCompatActivity) context)) {
             GlideApp.with(context)
                     .asBitmap()
                     .load(url)
@@ -119,7 +118,7 @@ public class GlideImage {
 
 
     public void loadImage(Context context, Object url, ImageView imageView) {
-        if (!ComUtil.isDestroy((Activity) context)) {
+        if (!ComUtil.isDestroy((RxAppCompatActivity) context)) {
             GlideApp.with(context)
                     .load(url)
                     .into(imageView);

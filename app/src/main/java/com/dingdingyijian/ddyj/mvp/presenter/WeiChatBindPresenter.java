@@ -44,7 +44,7 @@ public class WeiChatBindPresenter extends WeiChatBindContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -60,7 +60,7 @@ public class WeiChatBindPresenter extends WeiChatBindContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -91,7 +91,7 @@ public class WeiChatBindPresenter extends WeiChatBindContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
 
@@ -103,15 +103,15 @@ public class WeiChatBindPresenter extends WeiChatBindContract.Presenter {
         btnPwdLogin.setOnClickListener(v -> {
             if (!ComUtil.isFastClick()) {
                 if (TextUtils.isEmpty(phone.toString().trim())) {
-                    ToastUtil.showMsg("手机号码不能为空");
+                    ToastUtil.showMsg(mContext, "手机号码不能为空");
                     return;
                 }
                 if (!ConstantUtils.isMobile(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码错误，请重新输入");
+                    ToastUtil.showMsg(mContext, "手机号码错误，请重新输入");
                     return;
                 }
                 if (TextUtils.isEmpty(code.getText().toString().trim())) {
-                    ToastUtil.showMsg("验证码不能为空");
+                    ToastUtil.showMsg(mContext, "验证码不能为空");
                     return;
                 }
                 String mobile = phone.getText().toString().trim();
@@ -129,11 +129,11 @@ public class WeiChatBindPresenter extends WeiChatBindContract.Presenter {
         textView.setOnClickListener(v -> {
             if (!ComUtil.isFastClick()) {
                 if (TextUtils.isEmpty(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码不能为空");
+                    ToastUtil.showMsg(mContext, "手机号码不能为空");
                     return;
                 }
                 if (!ConstantUtils.isMobile(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码错误，请重新输入");
+                    ToastUtil.showMsg(mContext, "手机号码错误，请重新输入");
                     return;
                 }
                 getSendCode(phone.getText().toString().trim(), "smsLogin");

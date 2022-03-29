@@ -84,7 +84,7 @@ public class WeiChatBindActivity extends BaseActivity<WeiChatBindContract.View, 
     //获取登录验证码
     @Override
     public void getSendCodeResult() {
-        ToastUtil.showMsg("短信验证码已发送，请注意查收");
+        ToastUtil.showMsg(mContext, "短信验证码已发送，请注意查收");
         mDownTimerUtils = new CountDownTimerUtils(getBinding().sendCodeTV, 60000, 1000);
         mDownTimerUtils.start();
     }

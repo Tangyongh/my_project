@@ -71,7 +71,7 @@ public class RegisteredActivity extends BaseActivity<RegisteredContract.View, Re
     //注册成功
     @Override
     public void getRegisteredResult() {
-        ToastUtil.showMsg("注册成功");
+        ToastUtil.showMsg(mContext, "注册成功");
         //注册成功后把手机号码回显到登录界面
         LiveEventBus.get("register_success",String.class).post(getBinding().etPhone.getText().toString().trim());
         finish();
@@ -80,7 +80,7 @@ public class RegisteredActivity extends BaseActivity<RegisteredContract.View, Re
     //获取注册验证码
     @Override
     public void getSendCodeResult() {
-        ToastUtil.showMsg("短信验证码已发送，请注意查收");
+        ToastUtil.showMsg(mContext, "短信验证码已发送，请注意查收");
         mDownTimerUtils = new CountDownTimerUtils(getBinding().sendCodeTV, 60000, 1000);
         mDownTimerUtils.start();
     }

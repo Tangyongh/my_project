@@ -51,7 +51,7 @@ public class LoginCodePresenter extends LoginCodeContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
 
@@ -72,7 +72,7 @@ public class LoginCodePresenter extends LoginCodeContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -93,7 +93,7 @@ public class LoginCodePresenter extends LoginCodeContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
 
@@ -113,20 +113,20 @@ public class LoginCodePresenter extends LoginCodeContract.Presenter {
             if (!ComUtil.isFastClick()) {
                 //判断是否为空
                 if (TextUtils.isEmpty(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码不能为空");
+                    ToastUtil.showMsg(mContext, "手机号码不能为空");
                     return;
                 }
                 if (!ConstantUtils.isMobile(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码错误，请重新输入");
+                    ToastUtil.showMsg(mContext, "手机号码错误，请重新输入");
                     return;
                 }
                 if (TextUtils.isEmpty(code.getText().toString().trim())) {
-                    ToastUtil.showMsg("验证码不能为空");
+                    ToastUtil.showMsg(mContext, "验证码不能为空");
                     return;
                 }
 
                 if (!checkBox.isChecked()) {
-                    ToastUtil.showMsg("请勾选并阅读《用户使用协议》、《隐私政策》");
+                    ToastUtil.showMsg(mContext, "请勾选并阅读《用户使用协议》、《隐私政策》");
                     return;
                 }
                 String userPhone = phone.getText().toString().trim();
@@ -151,11 +151,11 @@ public class LoginCodePresenter extends LoginCodeContract.Presenter {
             if (!ComUtil.isFastClick()) {
 
                 if (TextUtils.isEmpty(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码不能为空");
+                    ToastUtil.showMsg(mContext, "手机号码不能为空");
                     return;
                 }
                 if (!ConstantUtils.isMobile(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码错误，请重新输入");
+                    ToastUtil.showMsg(mContext, "手机号码错误，请重新输入");
                     return;
                 }
                 getSendCode(phone.getText().toString().trim(), "smsLogin");

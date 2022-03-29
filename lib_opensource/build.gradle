@@ -59,6 +59,7 @@ dependencies {
     api rootProject.ext.dependencies["immersionbar"]
     debugImplementation rootProject.ext.dependencies["leakcanary"]
     api rootProject.ext.dependencies["permissiolnx"]
+    api rootProject.ext.dependencies["pictureselector"]
     //日志
     api 'com.github.zhaokaiqiang.klog:library:1.6.0'
     api 'com.dylanc:viewbinding-ktx:1.0.0'

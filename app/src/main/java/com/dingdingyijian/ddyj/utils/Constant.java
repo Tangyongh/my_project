@@ -26,4 +26,6 @@ public class Constant {
     public static final String PATH_WEB_CONTENT = "/app/ProtocolWebViewActivity";
     //微信登录绑定手机号
     public static final String PATH_WX_BIND = "/app/WeiChatBindActivity";
+    //编辑名片
+    public static final String PATH_MODIFY_CARD = "/app/ModifyBusinessCardActivity";
 }

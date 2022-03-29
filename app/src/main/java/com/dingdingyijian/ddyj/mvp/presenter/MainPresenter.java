@@ -44,7 +44,7 @@ public class MainPresenter extends MainContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -60,7 +60,7 @@ public class MainPresenter extends MainContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -76,15 +76,15 @@ public class MainPresenter extends MainContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
 
     //获取定位权限
     @Override
-    public void getPermissions(Context context) {
-        PermissionX.init((FragmentActivity) context)
+    public void getPermissions() {
+        PermissionX.init((FragmentActivity) mContext)
                 .permissions(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
                 .onExplainRequestReason((scope, deniedList, beforeRequest) -> {
                     //请求获取权限回调
@@ -96,15 +96,15 @@ public class MainPresenter extends MainContract.Presenter {
                 })
                 .request((allGranted, grantedList, deniedList) -> {
                     if (!allGranted) {
-                        ToastUtil.showMsg("您拒绝了如下权限" + deniedList);
+                        ToastUtil.showMsg(mContext, "您拒绝了如下权限" + deniedList);
                     }
                 });
     }
 
     //状态栏
     @Override
-    public void initStatusBar(Context context) {
-        ImmersionBar.with((Activity) context)
+    public void initStatusBar() {
+        ImmersionBar.with((Activity) mContext)
                 .statusBarDarkFont(true)
                 .statusBarColor(R.color.colorPrimary)
                 .autoStatusBarDarkModeEnable(true)

@@ -135,7 +135,6 @@ public class ComUtil {
         HashMap<String, String> map = new HashMap<>();
         StringBuffer sb = new StringBuffer();
         if (keyArray.length != valueArray.length) {
-            ToastUtil.showMsg("key value长度不对应");
         } else {
             for (int i = 0; i < keyArray.length; i++) {
                 map.put(keyArray[i], valueArray[i]);

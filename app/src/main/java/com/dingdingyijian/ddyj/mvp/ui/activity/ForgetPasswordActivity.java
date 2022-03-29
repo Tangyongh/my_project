@@ -65,7 +65,7 @@ public class ForgetPasswordActivity extends BaseActivity<ForgetPwdContract.View,
     //修改新密码成功
     @Override
     public void getSetPasswordResult() {
-        ToastUtil.showMsg("修改密码成功");
+        ToastUtil.showMsg(mContext, "修改密码成功");
         LiveEventBus.get("register_success", String.class).post(getBinding().etPhone.getText().toString().trim());
         finish();
     }
@@ -73,7 +73,7 @@ public class ForgetPasswordActivity extends BaseActivity<ForgetPwdContract.View,
     //获取验证码成功
     @Override
     public void getSendCodeResult() {
-        ToastUtil.showMsg("短信验证码已发送，请注意查收");
+        ToastUtil.showMsg(mContext, "短信验证码已发送，请注意查收");
         mDownTimerUtils = new CountDownTimerUtils(getBinding().sendCodeTV, 60000, 1000);
         mDownTimerUtils.start();
     }

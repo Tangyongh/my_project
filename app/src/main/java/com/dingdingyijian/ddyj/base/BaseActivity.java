@@ -41,7 +41,7 @@ public abstract class BaseActivity<V extends BaseViewImp, P extends BasePresente
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
+        this.mContext = this;
         initConfig(savedInstanceState);
     }
 
@@ -61,14 +61,14 @@ public abstract class BaseActivity<V extends BaseViewImp, P extends BasePresente
                 .autoNavigationBarDarkModeEnable(true)
                 .navigationBarColor(R.color.text_color_white)
                 .init();
-        if (presenter == null) {
-            presenter = createPresenter();
+        if (this.presenter == null) {
+            this.presenter = createPresenter();
         }
-        if (view == null) {
-            view = createView();
+        if (this.view == null) {
+            this.view = createView();
         }
-        if (presenter != null && view != null) {
-            presenter.attachView(view);
+        if (this.presenter != null && this.view != null) {
+            this.presenter.attachView(this.view);
         }
         initSoftKeyboard();
         initLoadingDialog();

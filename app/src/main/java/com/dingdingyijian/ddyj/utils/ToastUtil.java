@@ -16,48 +16,15 @@ import java.util.Date;
  */
 public class ToastUtil {
 
-    static long oldTime = 0;
 
-    public static void showMsg(String msg, int duration) {
-        if (new Date().getTime() - oldTime > 2000) {
-            oldTime = new Date().getTime();
-            CustomToast.showToast(App.instance.getContext(), msg);
-        }
+    public static void showMsg(Context context, String msg, int duration) {
+        CustomToast.showToast(context, msg);
     }
 
-    public static void showMsg(String msg) {
-        try {
-            if (new Date().getTime() - oldTime > 2000) {
-                oldTime = new Date().getTime();
-                if (msg == null || TextUtils.isEmpty(msg)) {
-                    return;
-                }
-                CustomToast.showToast(App.instance.getContext(), msg);
-            }
-        }catch (Exception e){
-          e.printStackTrace();  
+    public static void showMsg(Context context, String msg) {
+        if (TextUtils.isEmpty(msg)) {
+            return;
         }
-    }
-
-    public static void showMsgLong(String msg) {
-        CustomToast.showToast(App.instance.getContext(), msg);
-    }
-
-    private static MyToast toast;
-
-    public static void showToast(Context context, int code, String content) {
-        //code=1时Toast显示的时间长，code=0时显示的时间短。
-        try {
-            if (toast == null) {
-                if (code == 0)
-                    toast = MyToast.makeText(context, content, Toast.LENGTH_SHORT);
-                if (code == 1)
-                    toast = MyToast.makeText(context, content, Toast.LENGTH_LONG);
-            } else {
-                toast.setText(content);
-            }
-            toast.show();
-        } catch (Exception e) {
-        }
+        CustomToast.showToast(context, msg);
     }
 }

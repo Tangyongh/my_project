@@ -25,4 +25,6 @@ public class ApiUrl {
     public static final String USER_HOME_MAP_ICON_URL = "user/home-users";
     public static final String USER_WX_BIND_URL = "user/weixin-bind";
     public static final String USER_UPLOAD_AVATAR_URL = "picture/upload";
+    public static final String USER_AVATAR_URL = "user/upload-avatar";
+    public static final String USER_HOME_INFO_URL = "user/home-info";
 }

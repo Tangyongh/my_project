@@ -37,7 +37,6 @@ public class DataInfoResult {
                 banner.setDelayTime(4000);
                 banner.setOnBannerListener(position -> {
                     //banner 点击事件
-                    ToastUtil.showMsg("点击了======" + position);
                     Logger.d("LiveEventBus", "发送消息====");
                 });
                 banner.start();

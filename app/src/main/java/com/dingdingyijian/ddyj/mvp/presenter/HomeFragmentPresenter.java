@@ -59,7 +59,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -82,7 +82,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
 
             @Override
             public void onError(String e) {
-                ToastUtil.showMsg(e);
+                ToastUtil.showMsg(mContext, e);
             }
         });
     }
@@ -102,7 +102,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -123,7 +123,7 @@ public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }

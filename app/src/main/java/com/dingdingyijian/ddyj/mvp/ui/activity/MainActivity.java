@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
     @Override
     protected void initView(Bundle savedInstanceState) {
         //状态栏
-        getPresenter().initStatusBar(mContext);
+        getPresenter().initStatusBar();
         //初始化tab
         initTab();
         initData();
@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity<MainContract.View, MainContract.P
 
     private void initData() {
         //请求定位权限
-        getPresenter().getPermissions(mContext);
+        getPresenter().getPermissions();
         refreshNoticeNoRead();
         //消息监听
         onEvent();

@@ -47,7 +47,7 @@ public class PersonalFragmentPresenter extends PersonalFragmentContract.Presente
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
 
@@ -64,7 +64,7 @@ public class PersonalFragmentPresenter extends PersonalFragmentContract.Presente
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -80,7 +80,7 @@ public class PersonalFragmentPresenter extends PersonalFragmentContract.Presente
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -96,7 +96,7 @@ public class PersonalFragmentPresenter extends PersonalFragmentContract.Presente
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }

@@ -43,7 +43,7 @@ public interface LoginPwdContract {
         //点击登录
         public abstract void  clickLogin(BLButton btnPwdLogin, EditText phone, EditText pwd, CheckBox checkBox);
         //点击微信登录
-        public abstract void clickWxLogin(Context context, ImageView wxLogin,CheckBox checkBox);
+        public abstract void clickWxLogin(ImageView wxLogin,CheckBox checkBox);
     }
 
 

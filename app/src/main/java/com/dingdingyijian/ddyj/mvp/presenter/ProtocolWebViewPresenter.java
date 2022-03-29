@@ -52,7 +52,7 @@ public class ProtocolWebViewPresenter extends ProtocolWebViewContract.Presenter 
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }

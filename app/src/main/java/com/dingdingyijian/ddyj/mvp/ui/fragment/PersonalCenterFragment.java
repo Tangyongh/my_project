@@ -14,8 +14,10 @@ import com.dingdingyijian.ddyj.glide.GlideImage;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
+import com.dingdingyijian.ddyj.mvp.bean.UserUpLoadBean;
 import com.dingdingyijian.ddyj.mvp.contract.PersonalFragmentContract;
 import com.dingdingyijian.ddyj.mvp.data.DataInfoResult;
+import com.dingdingyijian.ddyj.mvp.data.UserUpLoad;
 import com.dingdingyijian.ddyj.mvp.presenter.PersonalFragmentPresenter;
 import com.dingdingyijian.ddyj.net.BaseObserver;
 import com.dingdingyijian.ddyj.net.RetrofitUtil;
@@ -23,12 +25,19 @@ import com.dingdingyijian.ddyj.net.helper.RxHelper;
 import com.dingdingyijian.ddyj.utils.Constant;
 import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.ConstantUtils;
+import com.dingdingyijian.ddyj.utils.Logger;
 import com.dingdingyijian.ddyj.utils.LoginUtils;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
+import com.dingdingyijian.ddyj.utils.ToastUtil;
 import com.ibd.tablayout.utils.UnreadMsgUtils;
 import com.jeremyliao.liveeventbus.LiveEventBus;
 
+import java.io.File;
+import java.util.HashMap;
+
+import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 /**
@@ -59,6 +68,13 @@ public class PersonalCenterFragment extends BaseFragment<PersonalFragmentContrac
         setBanner();
         //消息监听
         onEvent();
+        //点击事件
+        onClickListener();
+    }
+
+    private void onClickListener() {
+        //编辑名片
+        getBinding().userImage.setOnClickListener(v -> ARouter.getInstance().build(Constant.PATH_MODIFY_CARD).navigation());
     }
 
 

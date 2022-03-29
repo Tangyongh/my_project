@@ -146,5 +146,10 @@
             android:name=".mvp.ui.activity.ProtocolWebViewActivity"
             android:screenOrientation="portrait" />
 
+        <!--富文本协议页面-->
+        <activity
+            android:name=".mvp.ui.activity.ModifyBusinessCardActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 </manifest>

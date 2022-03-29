@@ -33,11 +33,11 @@ import java.util.Map;
 @SuppressWarnings("all")
 public class LoginPwdPresenter extends LoginPwdContract.Presenter {
 
-    private Context context;
+    private Context mContext;
     private LoginPwdModel loginPwdModel;
 
     public LoginPwdPresenter(Context context) {
-        this.context = context;
+        this.mContext = context;
         this.loginPwdModel = new LoginPwdModel();
     }
 
@@ -48,7 +48,7 @@ public class LoginPwdPresenter extends LoginPwdContract.Presenter {
      */
     @Override
     public void getLogin(LoginBean loginBean) {
-        loginPwdModel.getLogin(loginBean, context, new BaseModelCallBack<Object>() {
+        loginPwdModel.getLogin(loginBean, mContext, new BaseModelCallBack<Object>() {
             @Override
             public void onNext(Object result) {
                 //登录成功
@@ -57,7 +57,7 @@ public class LoginPwdPresenter extends LoginPwdContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -69,7 +69,7 @@ public class LoginPwdPresenter extends LoginPwdContract.Presenter {
      */
     @Override
     public void getAlias(HashMap<String, String> hashMap) {
-        loginPwdModel.getAlias(hashMap, context, new BaseModelCallBack<Object>() {
+        loginPwdModel.getAlias(hashMap, mContext, new BaseModelCallBack<Object>() {
             @Override
             public void onNext(Object result) {
 
@@ -77,7 +77,7 @@ public class LoginPwdPresenter extends LoginPwdContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
 
@@ -119,20 +119,20 @@ public class LoginPwdPresenter extends LoginPwdContract.Presenter {
             if (!ComUtil.isFastClick()) {
                 //判断是否为空
                 if (TextUtils.isEmpty(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码或登录名不能为空");
+                    ToastUtil.showMsg(mContext, "手机号码或登录名不能为空");
                     return;
                 }
                 if (TextUtils.isEmpty(pwd.getText().toString().trim())) {
-                    ToastUtil.showMsg("密码不能为空");
+                    ToastUtil.showMsg(mContext, "密码不能为空");
                     return;
                 }
                 if (pwd.getText().toString().length() < 6) {
-                    ToastUtil.showMsg("密码长度错误");
+                    ToastUtil.showMsg(mContext, "密码长度错误");
                     return;
                 }
 
                 if (!checkBox.isChecked()) {
-                    ToastUtil.showMsg("请勾选并阅读《用户使用协议》、《隐私政策》");
+                    ToastUtil.showMsg(mContext, "请勾选并阅读《用户使用协议》、《隐私政策》");
                     return;
                 }
                 LoginBean loginBean = LoginInfo.getLoginBean(phone.getText().toString().trim(), pwd.getText().toString().trim(), "1");
@@ -150,15 +150,15 @@ public class LoginPwdPresenter extends LoginPwdContract.Presenter {
      * @param checkBox
      */
     @Override
-    public void clickWxLogin(Context context, ImageView imageView, CheckBox checkBox) {
+    public void clickWxLogin( ImageView imageView, CheckBox checkBox) {
         imageView.setOnClickListener(v -> {
             if (!ComUtil.isFastClick()) {
                 if (!checkBox.isChecked()) {
-                    ToastUtil.showMsg("请勾选并阅读《用户使用协议》、《隐私政策》");
+                    ToastUtil.showMsg(mContext, "请勾选并阅读《用户使用协议》、《隐私政策》");
                     return;
                 }
                 showDialog();
-                UMShareAPI.get(context).getPlatformInfo((Activity) context, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
+                UMShareAPI.get(mContext).getPlatformInfo((Activity) mContext, SHARE_MEDIA.WEIXIN, new UMAuthListener() {
                     @Override
                     public void onStart(SHARE_MEDIA share_media) {
 
@@ -182,12 +182,12 @@ public class LoginPwdPresenter extends LoginPwdContract.Presenter {
                     @Override
                     public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
                         cancelShowDialog();
-                        ToastUtil.showMsg("登录失败");
+                        ToastUtil.showMsg(mContext, "登录失败");
                     }
 
                     @Override
                     public void onCancel(SHARE_MEDIA share_media, int i) {
-                        ToastUtil.showMsg("取消登录");
+                        ToastUtil.showMsg(mContext, "取消登录");
                         cancelShowDialog();
 
                     }

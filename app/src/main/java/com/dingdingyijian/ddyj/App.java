@@ -34,8 +34,6 @@ import me.jessyan.autosize.AutoSizeConfig;
  */
 public class App extends Application {
 
-    @SuppressLint("StaticFieldLeak")
-    public static App instance;
     public Context mContext;
 
 
@@ -61,7 +59,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         initARouter();
-        instance = this;
         initMMKV();
         AutoSizeConfig.getInstance()
                 .setCustomFragment(true)
@@ -115,6 +112,7 @@ public class App extends Application {
         }
         ARouter.init(this);
     }
+
     private static void initJPush(Context context) {
         /**
          * 统一推送服务标准接口
@@ -135,6 +133,7 @@ public class App extends Application {
             Logger.d("", "初始化，极光注册id===========" + registrationID);
         }
     }
+
     private void initLiveEvent() {
         LiveEventBus
                 .config()

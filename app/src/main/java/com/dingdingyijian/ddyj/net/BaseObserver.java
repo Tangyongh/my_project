@@ -66,7 +66,7 @@ public abstract class BaseObserver<T> implements Observer<BaseResponse<T>> {
         this.mDisposable = d;
         showCustomProgressDialog();
         if (!ComUtil.isConnected(mContext)) {
-            ToastUtil.showMsg("当前网络不可用，请检查网络设置");
+            ToastUtil.showMsg(mContext, "当前网络不可用，请检查网络设置");
             onCancelRequest();
         }
     }

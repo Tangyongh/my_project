@@ -69,7 +69,7 @@ public class LoginPwdActivity extends BaseActivity<LoginPwdContract.View, LoginP
         //点击登录
         getPresenter().clickLogin(btnPwdLogin, etPhone, etPwd, check);
         //点击微信登录
-        getPresenter().clickWxLogin(this, wxLogin, check);
+        getPresenter().clickWxLogin(wxLogin, check);
 
         //跳转验证码登录
         getBinding().tvCodeLogin.setOnClickListener(v -> {

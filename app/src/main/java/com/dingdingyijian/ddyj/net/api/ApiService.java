@@ -9,8 +9,11 @@ import com.dingdingyijian.ddyj.mvp.bean.NeedsCountBean;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserCenterInfoBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserIconBean;
+import com.dingdingyijian.ddyj.mvp.bean.UserInfoBean;
+import com.dingdingyijian.ddyj.mvp.bean.UserUpLoadBean;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.rxjava3.core.Observable;
 import okhttp3.MultipartBody;
@@ -99,8 +102,14 @@ public interface ApiService {
     Observable<BaseResponse<String>> userWeiXinBind(@Body RequestBody requestBody);
 
     //上传头像
-    @Multipart
     @POST(ApiUrl.USER_UPLOAD_AVATAR_URL)
-    Observable<BaseResponse<String>> upLoadAvatar(@Part MultipartBody.Part file, @Part("userType") String userType, @Part("filePath") String filePath, @Part("uid") String uid);
+    Observable<BaseResponse<UserUpLoadBean>> upLoadAvatar(@Body MultipartBody requestBody);
+
+    //修改用户上传的头像
+    @POST(ApiUrl.USER_AVATAR_URL)
+    Observable<BaseResponse<String>> modifyUserAvatar(@Body RequestBody requestBody);
+
+    @GET(ApiUrl.USER_HOME_INFO_URL)
+    Observable<BaseResponse<UserInfoBean>> userInfo(@Query("uid") String uid);
 
 }

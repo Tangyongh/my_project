@@ -51,7 +51,7 @@ public class RegisteredPresenter extends RegisteredContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
     }
@@ -72,7 +72,7 @@ public class RegisteredPresenter extends RegisteredContract.Presenter {
 
             @Override
             public void onError(String errorMsg) {
-                ToastUtil.showMsg(errorMsg);
+                ToastUtil.showMsg(mContext, errorMsg);
             }
         });
 
@@ -109,11 +109,11 @@ public class RegisteredPresenter extends RegisteredContract.Presenter {
             if (!ComUtil.isFastClick()) {
 
                 if (TextUtils.isEmpty(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码不能为空");
+                    ToastUtil.showMsg(mContext, "手机号码不能为空");
                     return;
                 }
                 if (!ConstantUtils.isMobile(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码错误，请重新输入");
+                    ToastUtil.showMsg(mContext, "手机号码错误，请重新输入");
                     return;
                 }
                 getSendCode(phone.getText().toString().trim(), "userRegister");
@@ -136,31 +136,31 @@ public class RegisteredPresenter extends RegisteredContract.Presenter {
         btnRegister.setOnClickListener(v -> {
             if (!ComUtil.isFastClick()) {
                 if (TextUtils.isEmpty(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码不能为空");
+                    ToastUtil.showMsg(mContext, "手机号码不能为空");
                     return;
                 }
                 if (!ConstantUtils.isMobile(phone.getText().toString().trim())) {
-                    ToastUtil.showMsg("手机号码错误，请重新输入");
+                    ToastUtil.showMsg(mContext, "手机号码错误，请重新输入");
                     return;
                 }
                 if (TextUtils.isEmpty(code.getText().toString().trim())) {
-                    ToastUtil.showMsg("短信验证码不能为空");
+                    ToastUtil.showMsg(mContext, "短信验证码不能为空");
                     return;
                 }
                 if (TextUtils.isEmpty(pwd.getText().toString().trim())) {
-                    ToastUtil.showMsg("密码不能为空");
+                    ToastUtil.showMsg(mContext, "密码不能为空");
                     return;
                 }
                 if (pwd.getText().toString().trim().length() < 6) {
-                    ToastUtil.showMsg("请输入6~20位的密码");
+                    ToastUtil.showMsg(mContext, "请输入6~20位的密码");
                     return;
                 }
                 if (!pwd.getText().toString().equals(confirmPwd.getText().toString())) {
-                    ToastUtil.showMsg("密码不一致");
+                    ToastUtil.showMsg(mContext, "密码不一致");
                     return;
                 }
                 if (!checkBox.isChecked()) {
-                    ToastUtil.showMsg("请勾选并阅读《用户使用协议》、《隐私政策》");
+                    ToastUtil.showMsg(mContext, "请勾选并阅读《用户使用协议》、《隐私政策》");
                     return;
                 }
                 String mobile = phone.getText().toString().trim();

@@ -47,10 +47,10 @@ public interface MainContract {
         public abstract void getNoticeNoRead();
 
         //获取定位权限
-        public abstract void getPermissions(Context context);
+        public abstract void getPermissions();
 
         //状态栏
-        public abstract void initStatusBar(Context context);
+        public abstract void initStatusBar();
     }
 
 

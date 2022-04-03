@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
+import com.dingdingyijian.ddyj.R;
 import com.dingdingyijian.ddyj.base.BaseFragment;
 import com.dingdingyijian.ddyj.databinding.FragmentHomeBinding;
 import com.dingdingyijian.ddyj.mapview.LocationUtils;
@@ -19,13 +20,17 @@ import com.dingdingyijian.ddyj.mvp.presenter.HomeFragmentPresenter;
 import com.dingdingyijian.ddyj.utils.Logger;
 import com.lk.mapsdk.base.mapapi.model.LatLng;
 import com.lk.mapsdk.base.platform.mapapi.util.CoordUtil;
+import com.lk.mapsdk.map.mapapi.annotation.options.MarkerOptions;
+import com.lk.mapsdk.map.mapapi.annotation.util.BitmapDescriptorFactory;
 import com.lk.mapsdk.map.mapapi.camera.MapStatus;
 import com.lk.mapsdk.map.mapapi.camera.MapStatusUpdateFactory;
 import com.lk.mapsdk.map.mapapi.map.LKMap;
+import com.lk.mapsdk.map.platform.style.layers.Property;
 import com.lk.mapsdk.search.mapapi.base.PoiInfo;
 import com.lk.mapsdk.search.mapapi.reversegeocoder.ReverseGeoCoder;
 import com.lk.mapsdk.search.mapapi.reversegeocoder.ReverseGeoCoderOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -100,7 +105,19 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
 
     @Override
     public void getMapViewIconResult(List<UserIconBean> userIconBean) {
-
+        if (userIconBean == null) return;
+        List<UserIconBean> list = new ArrayList<>(userIconBean);
+        if (list.size() >0){
+            for (UserIconBean bean : list) {
+                LatLng latLng = new LatLng(bean.getLat(), bean.getLon());
+                MarkerOptions endMarkerOptions = new MarkerOptions()
+                        .position(latLng)
+                        .icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker))
+                        .iconGravity(Property.ICON_ANCHOR_BOTTOM)
+                        .iconScale(1.0f);
+                mLkMap.addOverlay(endMarkerOptions);
+            }
+        }
     }
 
 
@@ -114,8 +131,6 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
         mLkMap.setOnMoveListener(this);
         mLkMap.setOnDidFinishLoadingMapListener(this);
     }
-
-
 
 
     @Override
@@ -205,6 +220,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
         MapStatus mapStatus = mLkMap.getMapStatus();
         double longitude = mapStatus.target.longitude;
         double latitude = mapStatus.target.latitude;
+        getPresenter().getMapViewIcon(new UserIconBean(longitude, latitude, "2"));
         LatLng targetLatLng = new LatLng(latitude, longitude);
         ReverseGeoCoder search = new ReverseGeoCoder();
         ReverseGeoCoderOptions options = new ReverseGeoCoderOptions();

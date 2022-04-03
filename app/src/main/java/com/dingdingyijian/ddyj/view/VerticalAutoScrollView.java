@@ -16,6 +16,8 @@ import com.dingdingyijian.ddyj.mvp.bean.NeedsAcceptListBean;
 import com.dingdingyijian.ddyj.utils.ComUtil;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,10 +56,11 @@ public class VerticalAutoScrollView extends LinearLayout {
      *
      * @param needsAcceptListBeans
      */
+    @SuppressWarnings("JavaDoc")
     public void setData(List<NeedsAcceptListBean> needsAcceptListBeans) {
-        try {
-            this.needsAcceptListBeans = needsAcceptListBeans;
-            if (needsAcceptListBeans != null && needsAcceptListBeans.size() > 0) {
+        this.needsAcceptListBeans = needsAcceptListBeans;
+        if (needsAcceptListBeans != null) {
+            if (needsAcceptListBeans.size() > 0) {
                 removeAllViews();
                 int size = needsAcceptListBeans.size();
                 for (int i = 0; i < size; i++) {
@@ -71,7 +74,6 @@ public class VerticalAutoScrollView extends LinearLayout {
                     smoothScrollBy(0, ComUtil.dip2px(mContext, (int) HEIGHT));
                 }
             }
-        } catch (Exception e) {
 
         }
 
@@ -82,17 +84,12 @@ public class VerticalAutoScrollView extends LinearLayout {
      * 重置数据
      */
     private void resetView() {
-        try {
-            NeedsAcceptListBean article = needsAcceptListBeans.get(0);
-            needsAcceptListBeans.remove(0);
-            needsAcceptListBeans.add(article);
-            for (int i = 0; i < 2; i++) {
-                addContentView(i);
-            }
-        } catch (Exception e) {
-
+        NeedsAcceptListBean article = needsAcceptListBeans.get(0);
+        needsAcceptListBeans.remove(0);
+        needsAcceptListBeans.add(article);
+        for (int i = 0; i < 2; i++) {
+            addContentView(i);
         }
-
     }
 
     /* */
@@ -106,47 +103,48 @@ public class VerticalAutoScrollView extends LinearLayout {
 
     @SuppressLint("SetTextI18n")
     private void addContentView(int position) {
-        try {
-            ViewHolder mHolder;
-            if (position >= getChildCount()) {
-                mHolder = new ViewHolder();
-                View v = View.inflate(getContext(), R.layout.item_view, null);
-                mHolder.mTitleText = v.findViewById(R.id.id_text_title);
-                mHolder.mTimeText = v.findViewById(R.id.id_text_time);
-                mHolder.mImageView = v.findViewById(R.id.imageView);
-                v.setTag(mHolder);
-                addView(v, LayoutParams.MATCH_PARENT, ComUtil.dip2px(mContext, (int) HEIGHT));
-            } else {
-                mHolder = (ViewHolder) getChildAt(position).getTag();
-            }
-            if (needsAcceptListBeans != null && needsAcceptListBeans.size() > 0) {
+        ViewHolder mHolder;
+        if (position >= getChildCount()) {
+            mHolder = new ViewHolder();
+            View v = View.inflate(getContext(), R.layout.item_view, null);
+            mHolder.mTitleText = v.findViewById(R.id.id_text_title);
+            mHolder.mTimeText = v.findViewById(R.id.id_text_time);
+            mHolder.mImageView = v.findViewById(R.id.imageView);
+            v.setTag(mHolder);
+            addView(v, LayoutParams.MATCH_PARENT, ComUtil.dip2px(mContext, (int) HEIGHT));
+        } else {
+            mHolder = (ViewHolder) getChildAt(position).getTag();
+        }
+        if (needsAcceptListBeans != null) {
+            if (needsAcceptListBeans.size() > 0) {
                 NeedsAcceptListBean mListBean = needsAcceptListBeans.get(position);
-                if (!TextUtils.isEmpty(mListBean.getRealName()) && mListBean.getRealName() != null) {
+                if (!TextUtils.isEmpty(mListBean.getRealName())) {
                     mHolder.mTitleText.setText(ComUtil.getHideUserName(mListBean.getRealName()) + "刚刚接了一个" + mListBean.getCategoryName() + "单");
                 } else {
                     mHolder.mTitleText.setText(ComUtil.getMobile(mListBean.getMobile()) + "刚刚接了一个" + mListBean.getCategoryName() + "单");
                 }
                 GlideImage.getInstance().loadImage(mContext, mListBean.getAvatarUrl(), R.mipmap.user_shape_icon, mHolder.mImageView);
             }
-        } catch (Exception e) {
-
         }
     }
 
-    private class ViewHolder {
+    private static class ViewHolder {
         TextView mTitleText;
         TextView mTimeText;
         ShapeableImageView mImageView;
     }
 
+    @SuppressWarnings("deprecation")
     @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
+        public void handleMessage(@NotNull android.os.Message msg) {
             mHandler.removeMessages(0);
             mHandler.sendEmptyMessageDelayed(0, DURING_TIME);
             smoothScrollBy(0, ComUtil.dip2px(mContext, (int) HEIGHT));
-            if (needsAcceptListBeans != null && needsAcceptListBeans.size() > 0) {
-                resetView();
+            if (needsAcceptListBeans != null) {
+                if (needsAcceptListBeans.size() > 0) {
+                    resetView();
+                }
             }
         }
 

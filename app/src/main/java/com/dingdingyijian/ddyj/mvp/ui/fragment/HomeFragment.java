@@ -130,6 +130,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
         mLkMap.setMapStatus(MapStatusUpdateFactory.buildUpdateByCenterAndZoom(latLng, 16));
         mLkMap.setOnMoveListener(this);
         mLkMap.setOnDidFinishLoadingMapListener(this);
+        getBinding().iconLocation.setOnClickListener(v -> mLkMap.setMapStatus(MapStatusUpdateFactory.buildUpdateByCenterAndZoom(latLng, 16)));
     }
 
 
@@ -193,7 +194,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
         LatLng targetLatLng = new LatLng(latitude, longitude);
         ReverseGeoCoder search = new ReverseGeoCoder();
         ReverseGeoCoderOptions options = new ReverseGeoCoderOptions();
-        options.setLocation(targetLatLng);
+        options.setLocation(targetLatLng).setRadius(0.2);
         // 发起检索
         search.reverseGeoCoderRequest(options, reverseGeoCoderResult -> {
             if (reverseGeoCoderResult.getPoiInfoList() == null) return;
@@ -224,7 +225,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
         LatLng targetLatLng = new LatLng(latitude, longitude);
         ReverseGeoCoder search = new ReverseGeoCoder();
         ReverseGeoCoderOptions options = new ReverseGeoCoderOptions();
-        options.setLocation(targetLatLng);
+        options.setLocation(targetLatLng).setRadius(0.2);
         // 发起检索
         search.reverseGeoCoderRequest(options, reverseGeoCoderResult -> {
             if (reverseGeoCoderResult.getPoiInfoList() == null) return;

@@ -9,14 +9,10 @@ import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.View;
 
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.model.CustomMapStyleOptions;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.trello.rxlifecycle4.components.support.RxAppCompatActivity;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -158,43 +154,6 @@ public class ComUtil {
         }
     }
 
-    /**
-     * 高德地图V7.0.0以后版本自定义样式
-     *
-     * @param context
-     * @param aMap
-     */
-    public static void setMapStyleFile(Context context, AMap aMap) {
-        byte[] buffer1 = null;
-        byte[] buffer2 = null;
-        InputStream is1 = null;
-        InputStream is2 = null;
-        try {
-            is1 = context.getAssets().open("style.data");
-            int lenght1 = is1.available();
-            buffer1 = new byte[lenght1];
-            is1.read(buffer1);
-            is2 = context.getAssets().open("style_extra.data");
-            int lenght2 = is2.available();
-            buffer2 = new byte[lenght2];
-            is2.read(buffer2);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (is1 != null)
-                    is1.close();
-                if (is2 != null)
-                    is2.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        CustomMapStyleOptions customMapStyleOptions = new CustomMapStyleOptions();
-        customMapStyleOptions.setStyleData(buffer1);
-        customMapStyleOptions.setStyleExtraData(buffer2);
-        aMap.setCustomMapStyle(customMapStyleOptions);
-    }
 
     /**
      * dip转px

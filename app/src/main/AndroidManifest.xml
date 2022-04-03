@@ -62,13 +62,9 @@
             android:name="UMENG_APPKEY"
             android:value="5c92113661f564ad4600113f" />
 
-
-        <!--高德地图-->
         <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="7b6e83625c1f4c95e812b1179354d3fb" />
-        <!--高德地图定位服务-->
-        <service android:name="com.amap.api.location.APSService" />
+            android:name="com.lk.lbsapi.API_KEY"
+            android:value="DE1648629423124733E6A000F515AC45DD8DECFDBA59784A99GLD0W6Z51J2521" />
 
         <!--启动页-->
         <activity

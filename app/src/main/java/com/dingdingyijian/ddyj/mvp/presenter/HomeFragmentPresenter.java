@@ -31,6 +31,7 @@ import java.util.List;
  * 因为我们不希望m层拥有直接操作v层的权利 隔离v与m层
  * 只希望m层与p层交互
  */
+@SuppressWarnings("all")
 public class HomeFragmentPresenter extends HomeFragmentContract.Presenter {
 
     private Context mContext;

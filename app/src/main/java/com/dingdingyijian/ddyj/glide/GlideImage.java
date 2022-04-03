@@ -54,6 +54,8 @@ public class GlideImage {
                     .load(url)
                     .centerCrop()
                     .placeholder(placeholder)
+                    .error(placeholder)
+                    .fallback(placeholder)
                     .into(imageView);
         }
     }

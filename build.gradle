@@ -12,6 +12,7 @@ buildscript {
         maven { url 'https://maven.aliyun.com/repository/google/' }
         maven { url 'https://maven.aliyun.com/repositorepositoryry/jcenter/' }
         maven { url 'https://maven.aliyun.com//central/' }
+        maven {url 'http://lbs-sdk.luokuang.com/repository/maven-public/'}
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0"
@@ -34,6 +35,7 @@ allprojects {
         maven { url 'https://maven.aliyun.com/repository/google/' }
         maven { url 'https://maven.aliyun.com/repositorepositoryry/jcenter/' }
         maven { url 'https://maven.aliyun.com//central/' }
+        maven {url 'http://lbs-sdk.luokuang.com/repository/maven-public/'}
         flatDir {
             dirs 'libs'
         }

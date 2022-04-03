@@ -125,7 +125,7 @@ public class ModifyBusinessCardActivity extends BaseActivity<ModifyBusinessCardC
 
     //点击事件
     private void onClickListener() {
-        //上传头像
+        //相册选择或拍照
         getBinding().userIcon.setOnClickListener(v -> {
             if (!ComUtil.isFastClick()) {
                 PictureSelectorUtils.getInstance(mContext).PictureSelector(ModifyBusinessCardActivity.this,
@@ -137,10 +137,5 @@ public class ModifyBusinessCardActivity extends BaseActivity<ModifyBusinessCardC
             finish();
             onEvent();
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }

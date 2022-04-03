@@ -13,6 +13,9 @@ import com.dingdingyijian.ddyj.utils.ConstantOther;
 import com.dingdingyijian.ddyj.utils.Logger;
 import com.dingdingyijian.ddyj.utils.PreferenceUtil;
 import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.lk.mapsdk.base.mapapi.initializer.InitializerOptions;
+import com.lk.mapsdk.base.mapapi.initializer.SDKInitializer;
+import com.lk.mapsdk.base.mapapi.model.CoordType;
 import com.tencent.mmkv.MMKV;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
@@ -68,6 +71,18 @@ public class App extends Application {
         initUM();
         initLiveEvent();
         setRxJavaErrorHandler();
+        initMapView();
+    }
+
+    private void initMapView() {
+        // 通过InitializerOptions指定初始化配置参数
+        InitializerOptions options = new InitializerOptions();
+        // 设置是否使用Https网络请求,默认使用
+        options.setIsHttpsEnable(true);
+        // 设置坐标系,默认GCJ02
+        options.setCoorType(CoordType.GCJ02);
+
+        SDKInitializer.initialization(getApplicationContext(),options);
     }
 
 

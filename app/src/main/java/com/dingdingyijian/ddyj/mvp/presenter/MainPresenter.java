@@ -8,11 +8,14 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.dingdingyijian.ddyj.R;
 import com.dingdingyijian.ddyj.base.BaseModelCallBack;
+import com.dingdingyijian.ddyj.event.LocationEvent;
+import com.dingdingyijian.ddyj.mapview.LocationUtils;
 import com.dingdingyijian.ddyj.mvp.bean.NoticeNoReadBean;
 import com.dingdingyijian.ddyj.mvp.contract.MainContract;
 import com.dingdingyijian.ddyj.mvp.model.MainModel;
 import com.dingdingyijian.ddyj.utils.ToastUtil;
 import com.gyf.immersionbar.ImmersionBar;
+import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.permissionx.guolindev.PermissionX;
 
 import java.util.HashMap;
@@ -97,6 +100,9 @@ public class MainPresenter extends MainContract.Presenter {
                 .request((allGranted, grantedList, deniedList) -> {
                     if (!allGranted) {
                         ToastUtil.showMsg(mContext, "您拒绝了如下权限" + deniedList);
+                    }else {
+                        LocationUtils.getInstance().startLocation(mContext);
+                        LiveEventBus.get(LocationEvent.class).post(new LocationEvent(39.908651, 116.397509));
                     }
                 });
     }

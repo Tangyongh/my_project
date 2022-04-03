@@ -2,28 +2,30 @@ package com.dingdingyijian.ddyj.mvp.ui.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.amap.api.maps.model.BitmapDescriptorFactory;
-import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.MarkerOptions;
-import com.dingdingyijian.ddyj.R;
 import com.dingdingyijian.ddyj.base.BaseFragment;
 import com.dingdingyijian.ddyj.databinding.FragmentHomeBinding;
+import com.dingdingyijian.ddyj.mapview.LocationUtils;
 import com.dingdingyijian.ddyj.mvp.bean.BannerBean;
 import com.dingdingyijian.ddyj.mvp.bean.NeedsAcceptListBean;
 import com.dingdingyijian.ddyj.mvp.bean.NeedsCountBean;
 import com.dingdingyijian.ddyj.mvp.bean.UserIconBean;
 import com.dingdingyijian.ddyj.mvp.contract.HomeFragmentContract;
 import com.dingdingyijian.ddyj.mvp.data.DataInfoResult;
-import com.dingdingyijian.ddyj.mvp.data.MapViewResult;
 import com.dingdingyijian.ddyj.mvp.presenter.HomeFragmentPresenter;
 import com.dingdingyijian.ddyj.utils.Logger;
+import com.lk.mapsdk.base.mapapi.model.LatLng;
+import com.lk.mapsdk.base.platform.mapapi.util.CoordUtil;
+import com.lk.mapsdk.map.mapapi.camera.MapStatus;
+import com.lk.mapsdk.map.mapapi.camera.MapStatusUpdateFactory;
+import com.lk.mapsdk.map.mapapi.map.LKMap;
+import com.lk.mapsdk.search.mapapi.base.PoiInfo;
+import com.lk.mapsdk.search.mapapi.reversegeocoder.ReverseGeoCoder;
+import com.lk.mapsdk.search.mapapi.reversegeocoder.ReverseGeoCoderOptions;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +33,9 @@ import java.util.List;
  * @time: 2022/3/11
  * @describe: 首页
  */
-public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFragmentContract.Presenter, FragmentHomeBinding> implements HomeFragmentContract.View {
+public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFragmentContract.Presenter, FragmentHomeBinding> implements HomeFragmentContract.View, LKMap.OnMapMoveListener, LKMap.OnDidFinishLoadingMapListener {
+
+    private LKMap mLkMap;
 
     public static HomeFragment getInstance() {
         return new HomeFragment();
@@ -40,6 +44,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
 
     @Override
     public HomeFragmentContract.Presenter createPresenter() {
+
         return new HomeFragmentPresenter(mContext);
     }
 
@@ -60,6 +65,7 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
         getPresenter().setNeedsCount(getBinding().tvMissNeeds, getBinding().tvMyNeeds, getBinding().tvSendNeeds);
         //登录成功或者退出登录的时候刷新下接口
         getPresenter().onEvent(getBinding().tvMissNeeds, getBinding().tvMyNeeds, getBinding().tvSendNeeds);
+
     }
 
 
@@ -94,11 +100,23 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
 
     @Override
     public void getMapViewIconResult(List<UserIconBean> userIconBean) {
-        if (userIconBean == null) return;
-        if (userIconBean.size() > 0) {
-            setMapData(userIconBean);
-        }
+
     }
+
+
+    //初始化高德地图
+    private void initMap(Bundle savedInstanceState) {
+        getBinding().mapView.onCreate(savedInstanceState);
+        mLkMap = getBinding().mapView.getMap();
+        LatLng center = LocationUtils.getInstance().getLatLng();
+        LatLng latLng = CoordUtil.fromWGS84ToGCJ02(center);
+        mLkMap.setMapStatus(MapStatusUpdateFactory.buildUpdateByCenterAndZoom(latLng, 16));
+        mLkMap.setOnMoveListener(this);
+        mLkMap.setOnDidFinishLoadingMapListener(this);
+    }
+
+
+
 
     @Override
     public void onResume() {
@@ -116,19 +134,22 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
     public void onStop() {
         super.onStop();
         getBinding().banner.stopAutoPlay();
+        getBinding().mapView.onStop();
     }
 
     @Override
     public void onStart() {
         super.onStart();
         getBinding().banner.startAutoPlay();
+        getBinding().mapView.onStart();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         getBinding().mapView.onDestroy();
-        getBinding().mapView.deactivate();
+        mLkMap.removeOnMoveListener(this);
+        mLkMap.removeOnDidFinishLoadingMapListener(this);
     }
 
     @Override
@@ -137,45 +158,72 @@ public class HomeFragment extends BaseFragment<HomeFragmentContract.View, HomeFr
         getBinding().mapView.onSaveInstanceState(outState);
     }
 
-    //初始化高德地图
-    private void initMap(Bundle savedInstanceState) {
-        //初始化地图
-        MapViewResult.getMapView(mContext, savedInstanceState, getBinding().mapView, getBinding().iconLocation);
 
-        //定位成功回调
-        getBinding().mapView.setLocationCallback(aMapLocation -> {
-            //定位成功
-            Logger.d("", "定位成功==========" + aMapLocation.getAddress());
-        });
+    @Override
+    public void onMoveBegin() {
 
-        //地图移动后的回调
-        getBinding().mapView.setonMapViewChangeCallBack(latLngEntity -> {
-            Logger.d("onCameraChangeFinish", "地图移动后的经纬度getLatitude==========" + latLngEntity.getLatitude());
-            Logger.d("onCameraChangeFinish", "地图移动后的经纬度getLongitude==========" + latLngEntity.getLongitude());
-            //移动地图之后加载地图上的头像
-            UserIconBean userIconBean = new UserIconBean(latLngEntity.getLongitude(), latLngEntity.getLatitude(), "1");
-            getPresenter().getMapViewIcon(userIconBean);
-        });
     }
 
+    @Override
+    public void onMove() {
 
-    /**
-     * 添加多个marker
-     */
-    public void setMapData(List<UserIconBean> userIconBean) {
-        if (userIconBean == null) return;
-        getBinding().mapView.getMap().clear(true);
-        List<UserIconBean> list = new ArrayList<>(userIconBean);
-        getBinding().mapView.post(() -> {
-            if (list.size() > 0) {
-                for (int i = 0; i < userIconBean.size(); i++) {
-                    @SuppressLint("InflateParams") View markerViews = LayoutInflater.from(mContext).inflate(R.layout.marker_image, null, false);
-                    getBinding().mapView.getMap().addMarker(new MarkerOptions()
-                            .position(new LatLng(list.get(i).getLat(), list.get(i).getLon()))//设置经度
-                            .setFlat(false) // 将Marker设置为贴地显示，可以双指下拉地图查看效果
-                            .draggable(false) //设置Marker可拖动
-                            .icon(BitmapDescriptorFactory.fromView(markerViews)));
-                }
+    }
+
+    @Override
+    public void onMoveEnd() {
+        //地图移动完成
+        MapStatus mapStatus = mLkMap.getMapStatus();
+        double longitude = mapStatus.target.longitude;
+        double latitude = mapStatus.target.latitude;
+        LatLng targetLatLng = new LatLng(latitude, longitude);
+        ReverseGeoCoder search = new ReverseGeoCoder();
+        ReverseGeoCoderOptions options = new ReverseGeoCoderOptions();
+        options.setLocation(targetLatLng);
+        // 发起检索
+        search.reverseGeoCoderRequest(options, reverseGeoCoderResult -> {
+            if (reverseGeoCoderResult.getPoiInfoList() == null) return;
+            List<PoiInfo> poiInfoList = reverseGeoCoderResult.getPoiInfoList();
+            if (poiInfoList.size() > 0) {
+                PoiInfo poiInfo = poiInfoList.get(0);
+                Logger.d("LocationManager,onMoveEnd", "latitude=========" + poiInfo.getCoordinate().latitude);
+                Logger.d("LocationManager,onMoveEnd", "latitude=========" + poiInfo.getCoordinate().longitude);
+                Logger.d("LocationManager,onMoveEnd", "getCountryName=========" + poiInfo.getProvinceName());
+                Logger.d("LocationManager,onMoveEnd", "getCityName=========" + poiInfo.getCityName());
+                Logger.d("LocationManager,onMoveEnd", "getCountyName=========" + poiInfo.getCountyName());
+                Logger.d("LocationManager,onMoveEnd", "getStreet=========" + poiInfo.getStreet());
+                Logger.d("LocationManager,onMoveEnd", "getName=========" + poiInfo.getName());
+                String address = poiInfo.getProvinceName() + poiInfo.getCityName() + poiInfo.getCountyName() + poiInfo.getStreet() + poiInfo.getName();
+                Logger.d("LocationManager,onMoveEnd", "address=========" + address);
+            }
+        });
+
+    }
+
+    @Override
+    public void onDidFinishLoadingMap() {
+        //地图加载完成
+        MapStatus mapStatus = mLkMap.getMapStatus();
+        double longitude = mapStatus.target.longitude;
+        double latitude = mapStatus.target.latitude;
+        LatLng targetLatLng = new LatLng(latitude, longitude);
+        ReverseGeoCoder search = new ReverseGeoCoder();
+        ReverseGeoCoderOptions options = new ReverseGeoCoderOptions();
+        options.setLocation(targetLatLng);
+        // 发起检索
+        search.reverseGeoCoderRequest(options, reverseGeoCoderResult -> {
+            if (reverseGeoCoderResult.getPoiInfoList() == null) return;
+            List<PoiInfo> poiInfoList = reverseGeoCoderResult.getPoiInfoList();
+            if (poiInfoList.size() > 0) {
+                PoiInfo poiInfo = poiInfoList.get(0);
+                Logger.d("LocationManager,onDidFinishLoadingMap", "latitude=========" + poiInfo.getCoordinate().latitude);
+                Logger.d("LocationManager,onDidFinishLoadingMap", "latitude=========" + poiInfo.getCoordinate().longitude);
+                Logger.d("LocationManager,onDidFinishLoadingMap", "getCountryName=========" + poiInfo.getProvinceName());
+                Logger.d("LocationManager,onDidFinishLoadingMap", "getCityName=========" + poiInfo.getCityName());
+                Logger.d("LocationManager,onDidFinishLoadingMap", "getCountyName=========" + poiInfo.getCountyName());
+                Logger.d("LocationManager,onDidFinishLoadingMap", "getStreet=========" + poiInfo.getStreet());
+                Logger.d("LocationManager,onDidFinishLoadingMap", "getName=========" + poiInfo.getName());
+                String address = poiInfo.getProvinceName() + poiInfo.getCityName() + poiInfo.getCountyName() + poiInfo.getStreet() + poiInfo.getName();
+                Logger.d("LocationManager,onDidFinishLoadingMap", "address=========" + address);
             }
         });
     }

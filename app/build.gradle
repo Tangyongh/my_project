@@ -122,27 +122,17 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["router-compiler"]
     implementation project(':lib_common')
     implementation 'com.tencent:mmkv:1.2.11'
-    //高德地图sdk
-    implementation 'com.amap.api:3dmap:latest.integration'
-    //定位功能
-    implementation 'com.amap.api:location:latest.integration'
-    //搜索功能
-    implementation 'com.amap.api:search:latest.integration'
+
     //极光推送sdk
     implementation 'cn.jiguang.sdk:jpush:4.6.0'
     implementation 'cn.jiguang.sdk:jcore:3.1.2'
-    // 接入华为厂商
     implementation 'com.huawei.hms:push:6.1.0.300'
-    // 极光厂商插件版本与接入 JPush 版本保持一致，下同
     implementation 'cn.jiguang.sdk.plugin:huawei:4.6.0'
-    // 接入魅族厂商
     implementation 'cn.jiguang.sdk.plugin:meizu:4.6.0'
-    // 接入 VIVO 厂商
     implementation 'cn.jiguang.sdk.plugin:vivo:4.6.0'
-    // 接入 OPPO 厂商
     implementation 'cn.jiguang.sdk.plugin:oppo:4.6.0'
-    // 接入小米厂商
     implementation 'cn.jiguang.sdk.plugin:xiaomi:4.6.0'
+
     //友盟统计、分享、登录sd
     implementation 'com.umeng.umsdk:common:9.4.4' //必选
     implementation 'com.umeng.umsdk:asms:1.4.1'//必选
@@ -150,10 +140,13 @@ dependencies {
     implementation 'com.umeng.umsdk:share-qq:7.1.7'
     implementation 'com.umeng.umsdk:share-wx:7.1.7'
     implementation files('libs/open_sdk_3.5.7.4_r1bc9afe_lite.jar')
+
     //支付宝sdk
     implementation(name: 'alipaysdk-15.8.06.211122170115', ext: 'aar')
     //微信sdk
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    //箩筐地图
+    implementation 'com.lk.mapsdk:sdk-full:2.3.2'
 
 
 

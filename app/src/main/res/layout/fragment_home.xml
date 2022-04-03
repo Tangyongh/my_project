@@ -20,8 +20,11 @@
             android:layout_weight="1"
             tools:ignore="NestedWeights">
 
-            <com.dingdingyijian.ddyj.mapview.CustomMapView
+            <com.lk.mapsdk.map.mapapi.map.MapView
                 android:id="@+id/mapView"
+                app:lk_uiLogoMarginBottom ="-50dp"
+                app:lk_scaleEnable ="false"
+                app:lk_uiCompass ="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

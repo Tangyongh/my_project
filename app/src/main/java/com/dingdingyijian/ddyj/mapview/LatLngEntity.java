@@ -1,6 +1,5 @@
 package com.dingdingyijian.ddyj.mapview;
 
-import com.amap.api.services.core.LatLonPoint;
 
 /**
  * Created by DDYiJian on 2019/4/13.
@@ -23,10 +22,6 @@ public class LatLngEntity {
         this.latitude = latitude;
     }
 
-    public LatLngEntity(LatLonPoint latLonPoint) {
-        this.longitude = latLonPoint.getLongitude();
-        this.latitude = latLonPoint.getLatitude();
-    }
 
     public double getLatitude() {
         return latitude;

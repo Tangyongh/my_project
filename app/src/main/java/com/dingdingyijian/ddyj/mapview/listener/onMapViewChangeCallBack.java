@@ -1,6 +1,5 @@
 package com.dingdingyijian.ddyj.mapview.listener;
 
-import com.amap.api.location.AMapLocation;
 import com.dingdingyijian.ddyj.mapview.LatLngEntity;
 
 /**
